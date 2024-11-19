@@ -1,0 +1,21 @@
+{{ 'application.css' | asset_url | stylesheet_tag }}
+
+<div class="flex justify-between bg-purple-900 p-2 w-full items-center">
+  <div>
+    <img
+    alt={{ shop.name }}
+    src="{{ "npLogo.png" | asset_img_url: 'large' }}"
+    class="max-w-12"
+    />
+  </div>
+  <nav class="flex text-white gap-2">
+    {% for link in linklists.main-menu.links %}
+      <a class="text-white" href="{{ link.url }}" >{{ link.title }}</a>
+    {% endfor %}
+  </nav>
+  <div class="flex gap-2 text-white font-bold">
+    <a href="" >Cart</a>
+    <a href="" >Login</a>
+    <a href="" >Register</a>
+  </div>
+</div>
