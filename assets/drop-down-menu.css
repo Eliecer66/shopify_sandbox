@@ -1,0 +1,22 @@
+/* /* The animation code */
+@keyframes example {
+  from {
+    background-color: red;
+  }
+
+  to {
+    background-color: yellow;
+  }
+}
+
+/*Custom classes */
+.drop-down-menu {
+  display: none;
+}
+
+.drop-down-menu__show {
+  position: absolute;
+  top: 2.5rem;
+  display: block;
+  display: none;
+}

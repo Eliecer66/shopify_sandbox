@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html class="h-full">
   <head>
     <title>{{ page_title }}</title>
     <meta charset="utf-8">
@@ -10,11 +10,11 @@
     {{ content_for_header }}
     <!-- Header hook for plugins -->
     {{ 'application.css' | asset_url | stylesheet_tag }}
-    {{ 'application.js' | asset_url | script_tag }}
+    <script src="{{ 'application.js' | asset_url }}" defer></script>
   </head>
-  <body>
+  <body class="h-full">
     {% section 'header' %}
-    <main class="main" role="main">
+    <main class="main h-full" role="main">
       {{ content_for_layout }}
     </main>
   </body>

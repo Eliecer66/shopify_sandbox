@@ -1,21 +1,152 @@
 {{ 'application.css' | asset_url | stylesheet_tag }}
+{{ 'drop-down-menu.css' | asset_url | stylesheet_tag }}
 
-<div class="flex justify-between bg-purple-900 p-2 w-full items-center">
-  <div>
+{% assign main_menu_linklist = linklists[section.settings.menu].links %}
+
+<div class="flex box-border relative justify-between bg-purple-900 w-full items-center">
+  <div class="px-4 py-2" >
     <img
+    width={500}
+    height={500}
     alt={{ shop.name }}
     src="{{ "npLogo.png" | asset_img_url: 'large' }}"
     class="max-w-12"
     />
   </div>
-  <nav class="flex text-white gap-2">
-    {% for link in linklists.main-menu.links %}
-      <a class="text-white" href="{{ link.url }}" >{{ link.title }}</a>
+  <div class="px-4 py-2 flex md:hidden">
+    <button onClick="toggleMenu('mobile-menu')" type="button" >
+      {% render "icon-menu" %}
+    </button>
+  </div>
+  <nav class="hidden text-white gap-2 md:flex">
+    {% for link in main_menu_linklist %}
+      {% if link.links != blank %}
+        <div class="relative flex flex-col justify-center items-center link-container">
+          <button
+            type="button"
+            onclick="toggleMenu('desktop-menu')"
+            class="desktop-menu sub-links flex items-center gap-2 justify-center"
+          >
+            {{ link.title }}
+            {% render "icon-chevron-down" %}
+          </button>
+            <drop-down-menu
+              hidden
+              id="desktop-menu"
+              data-open="false"
+              data-bound="desktop-menu"
+              class="absolute top-10"
+              >
+            {% for item in link.links%}
+              <div class="flex flex-col gap-2 bg-white text-black p-4 border rounded-lg w-80">
+                <div class="hover:bg-gray-100 p-4 rounded-lg">
+                  <a href="{{item.link}}" >
+                    <div>
+                      <p class="text-lg font-bold">{{item.title}}</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            {% endfor%}
+          </drop-down-menu>
+        </div>
+      {% else %}
+        <a class="text-white" href="{{ link.url }}" >{{ link.title }}</a>
+      {% endif %}
     {% endfor %}
   </nav>
-  <div class="flex gap-2 text-white font-bold">
-    <a href="" >Cart</a>
-    <a href="" >Login</a>
-    <a href="" >Register</a>
+  <div class="hidden md:flex gap-2 text-white font-bold px-8 py-2">
+    <a href="{{ routes.cart_url }}" >
+      {% render "icon-shopping-bag" %}
+    </a>
+    {% if shop.custormer_accounts_enabled %}
+      <a href="{{ routes.account_login_url }}" >Login</a>
+      <a href="{{ routes.account_register_url }}" >Register</a>
+    {% endif%}
   </div>
+  <!-- Mobile menu -->
+  <drop-down-menu
+    hidden
+    id="mobile-menu"
+    data-open="false"
+    data-bound="mobile-menu"
+    class="absolute top-1 w-full"
+    >
+    <div class="flex justify-center w-full">
+      <div class="flex bg-white w-[97%] rounded-lg border border-gray-300 drop-shadow-xl">
+        <div class="flex flex-col w-full p-4">
+          <div class="flex py-4 justify-between border border-transparent border-b-gray-200">
+            <p>{{ section.settings.mobile_menu_title }}</p>
+            <button onClick="toggleMenu('mobile-menu')" class="close-button">
+              {% render "icon-close" %}
+            </button>
+          </div>
+          <div class="flex flex-col gap-2 py-2">
+            {% for link in main_menu_linklist %}
+              {% if link.links != blank %}
+                <div class="flex items-center justify-between">
+                  <a
+                    class="text-gray-500 hover:text-gray-900"
+                    href="{{link.link}}"
+                  >
+                    {{link.title}}
+                  </a>
+                    <button
+                      onClick="toggleMenu('sub-menu')"
+                      class="sub-menu"
+                      type="button">
+                      {% render "icon-chevron-down" %}
+                    </button>
+                </div>
+                <drop-down-menu
+                  hidden
+                  id="sub-menu"
+                  data-open="false"
+                  data-bound="sub-menu"
+                >
+                  {% for subLinks in link.links %}
+                    <div class="ml-3">
+                      <a
+                        class="font-thin"
+                        href="{{subLinks.link}}"
+                      >
+                        {{subLinks.title}}
+                      </a>
+                    </div>
+                  {% endfor %}
+                </drop-down-menu>
+              {% else %}
+                <div>
+                  <a class="text-gray-500 hover:text-gray-900" href="{{link.link}}">{{link.title}}</a>
+                </div>
+              {% endif %}
+            {% endfor%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </drop-down-menu>
 </div>
+
+<script src="{{ "drop-down-menu.js" | asset_url }}" defer></script>
+
+{% schema %}
+ {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "text",
+        "id": "mobile_menu_title",
+        "label": "Title",
+        "default": "Header",
+        "info": "This is the title of mobile menu window",
+      },
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Header menu",
+        "default": "main-menu"
+      }
+    ]
+ }
+{% endschema %}

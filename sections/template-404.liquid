@@ -1,0 +1,48 @@
+
+<div class="flex h-full justify-center items-center">
+  <div class="flex flex-col justify-center items-center gap-4" >
+    <p class="font-bold text-4xl" > {{ section.settings.title }} </p>
+    <p class="text-lg" > {{ section.settings.sub_title }} </p>
+    {% if section.settings.redirect_url == blank %}
+      {% assign redirect_url = shop.secure_url %}
+    {% else %}
+      {% assign redirect_url = section.settings.redirect_url %}
+    {% endif %}
+    <div class="flex bg-green-500 px-4 py-2 shdow hover:bg-green-700 text-white rounded-lg">
+      <a href="{{ redirect_url }}"> {{ section.settings.redirect_label }}</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Template 404",
+    "tag": "section",
+    "class": "flex justify-center h-full",
+    "settings": [
+      {
+      "type": "text",
+      "id": "title",
+      "label": "404 Heading Title",
+      "default": "404"
+      },
+      {
+      "type": "text",
+      "id": "sub_title",
+      "default": "The page that you are looking for is not found",
+      "label": "404 Sub title"
+      },
+      {
+      "type": "text",
+      "id": "redirect_label",
+      "label": "Button Label",
+      "default": "Back to home page"
+      },
+      {
+      "type": "url",
+      "id": "redirect_url",
+      "label": "Button URL",
+      }
+    ]
+  }
+{% endschema %}
