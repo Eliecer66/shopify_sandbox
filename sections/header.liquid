@@ -3,59 +3,97 @@
 
 {% assign main_menu_linklist = linklists[section.settings.menu].links %}
 
-<div class="flex box-border relative justify-between bg-purple-900 w-full items-center">
+<div
+  class="flex box-border relative justify-between w-full items-center p-2"
+  style="background-color: {{ section.settings.bg_color }};"
+>
   <div class="px-4 py-2" >
-    <img
-    width={500}
-    height={500}
-    alt={{ shop.name }}
-    src="{{ "npLogo.png" | asset_img_url: 'large' }}"
-    class="max-w-12"
-    />
+    {% if section.settings.logo_image %}
+        <img
+          alt="{{ section.settings.logo_image.alt }}"
+          width="{{ section.settings.logo_size }}"
+          height="auto"
+          src="{{ section.settings.logo_image | image_url: width: 1500 }}"
+          {% if section.settings.logo_black == false %}
+            class="invert"
+          {% endif %}
+        >
+      {% else %}
+         <img
+            {% if section.settings.logo_black == false %}
+              class="invert"
+            {% endif %}
+             width="{{ section.settings.logo_size }}"
+             height="auto"
+             alt="{{ shop.name }}"
+             src="{{ "npLogo.png" | asset_img_url }}"
+          />
+      {% endif %}
   </div>
   <div class="px-4 py-2 flex md:hidden">
     <button onClick="toggleMenu('mobile-menu')" type="button" >
       {% render "icon-menu" %}
     </button>
   </div>
-  <nav class="hidden text-white gap-2 md:flex">
+    <nav
+      class="hidden gap-4 md:flex"
+      style="color: {{ section.settings.text_color }}; font-family: lato;"
+    >
     {% for link in main_menu_linklist %}
       {% if link.links != blank %}
-        <div class="relative flex flex-col justify-center items-center link-container">
+        <div class="flex flex-col justify-center items-center link-container">
           <button
             type="button"
             onclick="toggleMenu('desktop-menu')"
-            class="desktop-menu sub-links flex items-center gap-2 justify-center"
+            class="desktop-menu sub-links flex items-center gap-1 justify-center uppercase font-bold"
           >
             {{ link.title }}
             {% render "icon-chevron-down" %}
           </button>
-            <drop-down-menu
-              hidden
-              id="desktop-menu"
-              data-open="false"
-              data-bound="desktop-menu"
-              class="absolute top-10"
-              >
+          <drop-down-menu
+            hidden
+            id="desktop-menu"
+            data-open="false"
+            data-bound="desktop-menu"
+            class="absolute top-14 left-0 border font-bold uppercase z-10 w-full h-auto"
+          >
+          <div class="flex justify-center items-center w-full h-auto">
             {% for item in link.links%}
-              <div class="flex flex-col gap-2 bg-white text-black p-4 border rounded-lg w-80">
-                <div class="hover:bg-gray-100 p-4 rounded-lg">
-                  <a href="{{item.link}}" >
-                    <div>
-                      <p class="text-lg font-bold">{{item.title}}</p>
-                    </div>
+              <div
+                class="bg-white flex flex-col text-gray-500 p-4 w-full max-h-64"
+              >
+                <div class="flex flex-col justify-start items-center p-2 h-60 bg-white">
+                  <a href="{{item.link}}" class="cursor-pointer h-auto" >
+                    <p class="text-sm hover:text-black ">{{item.title}}</p>
                   </a>
+                {% if item.links != blank %}
+                  <div class="h-auto">
+                    {% for subLink in item.links %}
+                      <p> {{ subLink.title }}</p>
+                    {% endfor %}
+                  </div>
+                {% endif %}
                 </div>
               </div>
             {% endfor%}
+          </div>
           </drop-down-menu>
         </div>
       {% else %}
-        <a class="text-white" href="{{ link.url }}" >{{ link.title }}</a>
+        <a
+          class="text-white uppercase font-bold"
+          href="{{ link.url }}"
+          style="color: {{ section.settings.text_color }}"
+        >
+          {{ link.title }}
+        </a>
       {% endif %}
     {% endfor %}
   </nav>
   <div class="hidden md:flex gap-2 text-white font-bold px-8 py-2">
+    <button type="button" class="whitespace-nowrap text-base text-white hover:text-gray-400">
+      {% render "icon-search" %}
+    </button>
     <a href="{{ routes.cart_url }}" >
       {% render "icon-shopping-bag" %}
     </a>
@@ -126,9 +164,25 @@
       </div>
     </div>
   </drop-down-menu>
+  <search-bar
+    id="search"
+    data-open="false"
+    class="absolute h-full top-0 z-50 bg-white w-full"
+    >
+    <div class="flex justify-centerrgap-2">
+      <label for="search-input" >Search</label>
+      <input
+        name="search"
+        id="search-input"
+        type="search"
+        class="border border-black rounded-md"
+      >
+    </div>
+  </search-bar>
 </div>
 
-<script src="{{ "drop-down-menu.js" | asset_url }}" defer></script>
+<script src="{{ "drop-down-menu.js" | asset_url }}" defer ></script>
+<script src="{{ "search-bar.js" | asset_url }}" defer ></script>
 
 {% schema %}
  {
@@ -146,6 +200,37 @@
         "id": "menu",
         "label": "Header menu",
         "default": "main-menu"
+      },
+      {
+        "type": "image_picker",
+        "id": "logo_image",
+        "label": "Logo",
+        "info": "This is the navbar logo"
+      },
+      {
+        "type": "range",
+        "id": "logo_size",
+        "min": 50,
+        "max": 500,
+        "step": 10,
+        "unit": "px",
+        "label": "Font size",
+        "default": 50
+      },{
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background color",
+        "default": "#000080"
+      },{
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#fafafa"
+      },{
+        "type": "checkbox",
+        "id": "logo_black",
+        "label": "Logo black",
+        "default": false
       }
     ]
  }

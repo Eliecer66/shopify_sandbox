@@ -1,0 +1,30 @@
+<div class="px-4 py-8" >
+  <a class="text-base text-gray-500 hover:underline text-center my-4 block" href="{{ routes.collections_url }}" > Go back to collections </a>
+  {% paginate collection.products by section.settings.pagiate_size %}
+  <h1 class="text-3xl text-center" > {{ collection.title }} </h1>
+  <div class="max-w-6xl mx-auto" >
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4" >
+      {% for product in collection.products %}
+        {% render "product-cart", product: product %}
+      {% else %}
+        <p> I'm sorry there is no product inside this collection </p>
+      {% endfor %}
+    </div>
+  </div>
+  {% render "pagination", pagination: paginate%}
+  {% endpaginate %}
+</div>
+
+{% schema %}
+  {
+    "name": "Template Collection",
+    "settings": [
+      {
+        "default": 6,
+        "id": "pagiate_size",
+        "label": "Paginate size",
+        "type": "number",
+      }
+    ]
+  }
+{% endschema %}
