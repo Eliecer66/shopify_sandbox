@@ -38,9 +38,8 @@ class DropDownMenu extends HTMLElement {
 
   clickOutRange(event) {
     const isContained = this.contains(event.target)
-    const element = `.${this.getIdButton()}`
-    const clickTrigger = document.querySelector(element)
-    const isTrigger = clickTrigger.contains(event.target)
+    const element = document.getElementById(`button-${this.id}`)
+    const isTrigger = element.contains(event.target)
 
     if (!isContained && !isTrigger) {
       this.setAttribute("hidden", true)

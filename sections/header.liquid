@@ -9,6 +9,10 @@
 >
   <div class="px-4 py-2" >
     {% if section.settings.logo_image %}
+      <a
+        href="/"
+        class="hover:cursor-pointer"
+      >
         <img
           alt="{{ section.settings.logo_image.alt }}"
           width="{{ section.settings.logo_size }}"
@@ -18,16 +22,22 @@
             class="invert"
           {% endif %}
         >
+      </a>
       {% else %}
-         <img
-            {% if section.settings.logo_black == false %}
-              class="invert"
-            {% endif %}
-             width="{{ section.settings.logo_size }}"
-             height="auto"
-             alt="{{ shop.name }}"
-             src="{{ "npLogo.png" | asset_img_url }}"
-          />
+        <a
+          href="/"
+          class="hover:cursor-pointer"
+        >
+           <img
+              {% if section.settings.logo_black == false %}
+                class="invert"
+              {% endif %}
+               width="{{ section.settings.logo_size }}"
+               height="auto"
+               alt="{{ shop.name }}"
+               src="{{ "npLogo.png" | asset_img_url }}"
+            />
+          </a>
       {% endif %}
   </div>
   <div class="px-4 py-2 flex md:hidden">
@@ -43,8 +53,9 @@
       {% if link.links != blank %}
         <div class="flex flex-col justify-center items-center link-container">
           <button
+            id="button-{{link.title}}"
             type="button"
-            onclick="toggleMenu('desktop-menu')"
+            onclick="toggleMenu('{{link.title}}')"
             class="desktop-menu sub-links flex items-center gap-1 justify-center uppercase font-bold"
           >
             {{ link.title }}
@@ -52,31 +63,59 @@
           </button>
           <drop-down-menu
             hidden
-            id="desktop-menu"
+            id="{{ link.title }}"
             data-open="false"
-            data-bound="desktop-menu"
+            data-bound="{{ link.title }}"
             class="absolute top-14 left-0 border font-bold uppercase z-10 w-full h-auto"
           >
-          <div class="flex justify-center items-center w-full h-auto">
-            {% for item in link.links%}
-              <div
-                class="bg-white flex flex-col text-gray-500 p-4 w-full max-h-64"
-              >
-                <div class="flex flex-col justify-start items-center p-2 h-60 bg-white">
-                  <a href="{{item.link}}" class="cursor-pointer h-auto" >
-                    <p class="text-sm hover:text-black ">{{item.title}}</p>
-                  </a>
-                {% if item.links != blank %}
-                  <div class="h-auto">
-                    {% for subLink in item.links %}
-                      <p> {{ subLink.title }}</p>
-                    {% endfor %}
+            <div class="flex justify-center items-start w-full h-auto bg-white">
+              {% for item in link.links %}
+                <div
+                  class="bg-white flex flex-col text-gray-500 p-4 w-full max-h-64"
+                >
+                  <div class="flex flex-col justify-start items-start p-2 h-60 bg-white w-full">
+                    <a
+                      href="{{item.link}}"
+                      class="hover:text-black hover:cursor-pointer font-black lowercase first-letter:uppercase"
+                    >
+                      {{item.title}}
+                    </a>
+                    {% if item.links != blank %}
+                      <div class="h-auto flex flex-col mt-2">
+                        {% for subLink in item.links %}
+                          <a
+                            href="{{ subLink.link }}"
+                            class="hover:underline hover:text-gray-800 hover:cursor-pointer font-light lowercase first-letter:uppercase"
+                          >
+                            {{ subLink.title }}
+                          </a>
+                        {% endfor %}
+                      </div>
+                    {% endif %}
                   </div>
-                {% endif %}
                 </div>
+              {% endfor%}
+              <div class="flex pt-8 pr-8 pb-2 items-start h-full" >
+                {% for block in section.blocks %}
+                  <a
+                    class="p-2"
+                    href="{{ collections[block.settings.handler_collection].url }}"
+                  >
+                    <img
+                      alt="img-{{block.title}}"
+                      width="auto"
+                      height="auto"
+                      src={{ block.settings.collection_img | image_url: width: 1000, height: 1200 }}
+                    >
+                      <p
+                        class="pt-2 lowercase text-gray-400 text-sm first-letter:uppercase"
+                      >
+                        {{ block.settings.title }}
+                      </p>
+                  </a>
+                {% endfor %}
               </div>
-            {% endfor%}
-          </div>
+            </div>
           </drop-down-menu>
         </div>
       {% else %}
@@ -91,7 +130,11 @@
     {% endfor %}
   </nav>
   <div class="hidden md:flex gap-2 text-white font-bold px-8 py-2">
-    <button type="button" class="whitespace-nowrap text-base text-white hover:text-gray-400">
+    <button
+      type="button"
+      class="whitespace-nowrap text-base text-white hover:text-gray-400"
+      onclick="toggleSearch('search')"
+    >
       {% render "icon-search" %}
     </button>
     <a href="{{ routes.cart_url }}" >
@@ -108,7 +151,7 @@
     id="mobile-menu"
     data-open="false"
     data-bound="mobile-menu"
-    class="absolute top-1 w-full"
+    class="absolute top-1 w-full z-10"
     >
     <div class="flex justify-center w-full">
       <div class="flex bg-white w-[97%] rounded-lg border border-gray-300 drop-shadow-xl">
@@ -167,16 +210,30 @@
   <search-bar
     id="search"
     data-open="false"
-    class="absolute h-full top-0 z-50 bg-white w-full"
-    >
-    <div class="flex justify-centerrgap-2">
-      <label for="search-input" >Search</label>
-      <input
-        name="search"
-        id="search-input"
-        type="search"
-        class="border border-black rounded-md"
+    class="absolute h-full top-0 left-0 z-50 bg-white w-full border"
+  >
+    <div class="flex justify-center gap-2 items-center h-full">
+      <button
+        class="absolute right-0 top-0 p-2"
+        onclick="toggleSearch('search')"
       >
+        {% render 'icon-close' %}
+      </button>
+      <form class="flex items-center gap-2" method="get" action="{{ routes.search_url }}">
+        <input
+          name="q"
+          type="search"
+          placeholder="Search"
+          class="border border-black rounded-md p-2"
+        >
+        <button
+          type="submit"
+          class="flex h-auto items-center"
+          onclick="toggleSearch('search')"
+        >
+          {% render 'icon-search' %}
+        </button>
+      </form>
     </div>
   </search-bar>
 </div>
@@ -231,6 +288,29 @@
         "id": "logo_black",
         "label": "Logo black",
         "default": false
+      }
+    ],
+    "max_blocks": 2,
+    "blocks": [
+      {
+        "name": "Collection",
+        "type": "showcase",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "image_picker",
+            "id": "collection_img",
+            "label": "Collection img"
+          },{
+            "type": "text",
+            "id": "handler_collection",
+            "label": "Handler img"
+          }
+        ]
       }
     ]
  }
