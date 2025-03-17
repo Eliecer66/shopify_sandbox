@@ -1,0 +1,87 @@
+
+<!-- ========================== VARIALBES ================================= -->
+
+{% assign footer_linklist = linklists[section.settings.footer].links %}
+
+<!-- ========================== DOM SECTION =============================== -->
+
+<footer class="bg-white border-y-2 p-12 w-full mt-18">
+  <div class="flex justify-evenly w-full">
+    {% for link in footer_linklist %}
+      {% if link.links != blank %}
+        <div class="flex flex-col p-2">
+          <a
+            class="pb-2 hover:text-black hover:cursor-pointer font-black lowercase first-letter:uppercase"
+            href="{{ link.url }}"
+          >
+            {{ link.title }}
+          </a>
+          {% for subLink in link.links %}
+            <a
+              href="{{ subLink.url }}"
+              class="text-gray-600 hover:underline hover:text-gray-900 hover:cursor-pointer font-light lowercase first-letter:uppercase"
+            >
+              {{ subLink.title }}
+            </a>
+        {% endfor%}
+        </div>
+      {% else %}
+        <a
+          href="{{ link.url }}"
+          >
+          {{ link.title }}
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+  <div class="flex justify-center gap-4">
+    {% for block in section.blocks %}
+      <a
+        href="{{ block.settings.media_url }}"
+        class="hover:cursor-pointer"
+        target="_blank"
+      >
+        <img
+          width="auto"
+          height="auto"
+          src={{ block.settings.media_icon | image_url: width: 30, height: 30 }}
+        >
+      </a>
+    {% endfor %}
+  </div>
+</footer>
+
+<!-- ======================== SCHEMA SECTION ============================== -->
+
+{% schema %}
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "footer",
+        "label": "Menu",
+        "default": "footer"
+      }
+     ],
+    "max_blocks": 4,
+    "blocks": [
+      {
+        "name": "Social media",
+        "type": "media",
+        "settings": [
+          {
+            "type": "text",
+            "label": "Media url",
+            "id": "media_url"
+          },{
+            "type": "image_picker",
+            "label": "Icon media",
+            "id": "media_icon"
+          }
+        ]
+
+        }
+    ]
+  }
+{% endschema %}

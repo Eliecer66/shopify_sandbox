@@ -1,7 +1,7 @@
 {
   "sections": {
     "featured-collection": {
-      "type": "template-list-collections",
+      "type": "featured-collection",
       "settings": {
         "featured_collection": "all"
       }
