@@ -1,0 +1,63 @@
+{% assign  banner_img = section.settings.banner_img %}
+{% assign  banner_title = section.settings.banner_title %}
+{% assign  button_title = section.settings.button_title %}
+{% assign  button_url = section.settings.button_url %}
+
+<div class="flex w-full relative">
+  {% if banner_img == blank %}
+    {{ "hero-apparel-1" | placeholder_svg_tag: "w-full h-80 object-cover bg-gray-100" }}
+  {% else %}
+    <img
+      src="{{ banner_img | image_url }}"
+      width="auto"
+      height="auto"
+      class="object-cover h-screen w-full"
+    >
+  {% endif %}
+  <div
+    class="absolute bg-[#0000005e] flex justify-start items-center h-full w-full"
+  >
+    <div class="w-full flex flex-col items-start justify-start pl-24 gap-6">
+      <p
+        class="text-white text-5xl font-bold font-serif"
+      >
+        {{ banner_title }}
+      </p>
+      <a
+        href="{{ button_url }}"
+        class="hover:cursor-pointer hover:bg-gray-200 border text-sm px-6 py-2 uppercase bg-white font-bold"
+      >
+        {{ button_title }}
+      </a>
+    </div>
+
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Banner",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "banner_img",
+        "label": "Banner img",
+      }, {
+        "type": "text",
+        "id": "banner_title",
+        "label": "Banner title",
+        "default": "Your New Pair Awaits..."
+      }, {
+        "type": "text",
+        "id": "button_title",
+        "label": "Button title",
+        "default": "Shop All Styles"
+      }, {
+        "type":"url",
+        "id": "button_url",
+        "label": "Button url"
+      }
+    ]
+  }
+{% endschema %}
+
+

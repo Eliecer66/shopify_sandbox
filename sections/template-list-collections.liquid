@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center my-8" >
+<div class="flex flex-col items-center my-8 mt-28" >
   <h1 class="text-3xl font-medium">
     {{ section.settings.title }}
   </h1>
@@ -19,7 +19,7 @@
                     width="auto"
                     height="auto"
                     class="w-full h-full object-cover transition duration-1000 ease-in-out transform hover:scale-105"
-                    src="{{ collection_img | img_url: "medium "}}"
+                    src="{{ collection_img | image_url }}"
                     alt="{{ collection.title}}"
                   >
                 </div>

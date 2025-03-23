@@ -4,23 +4,22 @@
 {% assign main_menu_linklist = linklists[section.settings.menu].links %}
 
 <div
-  class="flex box-border relative justify-between w-full items-center p-2"
-  style="background-color: {{ section.settings.bg_color }};"
+  id="navbar"
+  class="flex box-border fixed z-20 justify-between w-full items-center p-2"
+  style="background-color: transparent;"
 >
-  <div class="px-4 py-2" >
+  <div class="px-4 py-2 relative" >
     {% if section.settings.logo_image %}
       <a
         href="/"
         class="hover:cursor-pointer"
       >
         <img
+          id="nav-logo"
           alt="{{ section.settings.logo_image.alt }}"
           width="{{ section.settings.logo_size }}"
           height="auto"
           src="{{ section.settings.logo_image | image_url: width: 1500 }}"
-          {% if section.settings.logo_black == false %}
-            class="invert"
-          {% endif %}
         >
       </a>
       {% else %}
@@ -29,9 +28,7 @@
           class="hover:cursor-pointer"
         >
            <img
-              {% if section.settings.logo_black == false %}
-                class="invert"
-              {% endif %}
+               id="nav-logo"
                width="{{ section.settings.logo_size }}"
                height="auto"
                alt="{{ shop.name }}"
@@ -46,13 +43,15 @@
     </button>
   </div>
     <nav
+      id="nav-txt"
       class="hidden gap-4 md:flex"
-      style="color: {{ section.settings.text_color }}; font-family: lato;"
+      style="color: black; font-family: lato;"
     >
     {% for link in main_menu_linklist %}
       {% if link.links != blank %}
         <div class="flex flex-col justify-center items-center link-container">
           <button
+            name="nav-sublink"
             id="button-{{link.title}}"
             type="button"
             onclick="toggleMenu('{{link.title}}')"
@@ -66,7 +65,7 @@
             id="{{ link.title }}"
             data-open="false"
             data-bound="{{ link.title }}"
-            class="absolute top-14 left-0 border font-bold uppercase z-10 w-full h-auto"
+            class="absolute top-[85%] left-0 border font-bold uppercase z-10 w-full h-auto"
           >
             <div class="flex justify-center items-start w-full h-auto bg-white">
               {% for item in link.links %}
@@ -75,6 +74,7 @@
                 >
                   <div class="flex flex-col justify-start items-start p-2 h-60 bg-white w-full">
                     <a
+                      name="nav-sublink"
                       href="{{item.link}}"
                       class="hover:text-black hover:cursor-pointer font-black lowercase first-letter:uppercase"
                     >
@@ -84,6 +84,7 @@
                       <div class="h-auto flex flex-col mt-2">
                         {% for subLink in item.links %}
                           <a
+                            name="nav-sublink"
                             href="{{ subLink.link }}"
                             class="hover:underline hover:text-gray-800 hover:cursor-pointer font-light lowercase first-letter:uppercase"
                           >
@@ -120,9 +121,10 @@
         </div>
       {% else %}
         <a
+          name="nav-sublink"
           class="text-white uppercase font-bold"
           href="{{ link.url }}"
-          style="color: {{ section.settings.text_color }}"
+          style="color: black"
         >
           {{ link.title }}
         </a>
@@ -140,10 +142,17 @@
     <a href="{{ routes.cart_url }}" >
       {% render "icon-shopping-bag" %}
     </a>
-    {% if shop.custormer_accounts_enabled %}
-      <a href="{{ routes.account_login_url }}" >Login</a>
-      <a href="{{ routes.account_register_url }}" >Register</a>
-    {% endif%}
+    {% if customer %}
+      <a
+        href="{{routes.account_url}}"
+        name="nav-sublink"
+      >
+        Hello, {{ customer.first_name }}
+      </a>
+    {% else %}
+      <a name="nav-sublink" href="{{ routes.account_login_url }}" >Login</a>
+      <a name="nav-sublink" href="{{ routes.account_register_url }}" >Register</a>
+    {% endif %}
   </div>
   <!-- Mobile menu -->
   <drop-down-menu
@@ -219,7 +228,11 @@
       >
         {% render 'icon-close' %}
       </button>
-      <form class="flex items-center gap-2" method="get" action="{{ routes.search_url }}">
+        <form
+          class="flex items-center gap-2"
+          method="get"
+          action="{{ routes.search_url }}"
+        >
         <input
           name="q"
           type="search"
@@ -231,7 +244,7 @@
           class="flex h-auto items-center"
           onclick="toggleSearch('search')"
         >
-          {% render 'icon-search' %}
+          {% render "icon-search", dark: true %}
         </button>
       </form>
     </div>
@@ -268,28 +281,13 @@
         "type": "range",
         "id": "logo_size",
         "min": 50,
-        "max": 500,
+        "max": 110,
         "step": 10,
         "unit": "px",
-        "label": "Font size",
+        "label": "Logo size",
         "default": 50
-      },{
-        "type": "color",
-        "id": "bg_color",
-        "label": "Background color",
-        "default": "#000080"
-      },{
-        "type": "color",
-        "id": "text_color",
-        "label": "Text color",
-        "default": "#fafafa"
-      },{
-        "type": "checkbox",
-        "id": "logo_black",
-        "label": "Logo black",
-        "default": false
-      }
-    ],
+        }
+      ],
     "max_blocks": 2,
     "blocks": [
       {
@@ -315,3 +313,57 @@
     ]
  }
 {% endschema %}
+
+<script>
+  let navbar = document.getElementById("navbar");
+  const initialColor = "white";
+  let isHome = document.location.pathname === "/" ? true : false;
+  let prevPosition = window.scrollY;
+  let navIcons = Array.from(document.getElementsByName("nav-icon"))
+  let navLogo = document.getElementById("nav-logo")
+  let links = Array.from(document.getElementsByName("nav-sublink"))
+
+  if (window.scrollY === 0 && isHome) {
+    navbar.style.backgroundColor = "transparent";
+    navIcons.forEach((item) => (item.style.color = "white"))
+    navLogo.style.filter = "invert(100%)"
+    links.forEach((item) => (item.style.color = "white"))
+    navbar.style.borderBottom = "none"
+  }
+
+  if (window.scrollY === 0 && !isHome) {
+    navbar.style.borderBottom = "1px solid lightgray"
+    links.forEach((item) => (item.style.color = "black"))
+  }
+
+  window.addEventListener("scroll", () => {
+    let scrollPosition = window.scrollY;
+    const isGoingDown = scrollPosition > prevPosition ? true : false;
+
+    isHome = document.location.pathname === "/" ? true : false;
+
+    if (isGoingDown) {
+      navbar.style.position = "absolute"
+    } else {
+      navbar.style.backgroundColor = initialColor;
+      navbar.style.position = "fixed"
+      navbar.style.borderBottom = "1px solid lightgray"
+    }
+    if (isHome) {
+      if (scrollPosition > 100) {
+        navbar.style.backgroundColor = initialColor;
+        navbar.style.borderBottom = "1px solid lightgray"
+        navIcons.forEach((item) => (item.style.color = "black"))
+        navLogo.style.filter = "invert(0)"
+        links.forEach((item) => (item.style.color = "black"))
+      } else {
+        navbar.style.backgroundColor = "transparent";
+        navbar.style.borderBottom = "1px solid transparent"
+        navIcons.forEach((item) => (item.style.color = "white"))
+        navLogo.style.filter = "invert(100%)"
+        links.forEach((item) => (item.style.color = "white"))
+      }
+    }
+    prevPosition = scrollPosition;
+  });
+</script>

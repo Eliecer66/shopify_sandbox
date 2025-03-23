@@ -15,11 +15,11 @@
     {{ 'application.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'application.js' | asset_url }}" defer></script>
   </head>
-  <body class="h-screen">
+  <body class="h-screen flex justify-between flex-col">
     {% section 'header' %}
-    <main class="main h-full" role="main">
+    <main class="main h-screen flex flex-col justify-start" role="main">
       {{ content_for_layout }}
+      {% section 'footer' %}
     </main>
-    {% section 'footer' %}
   </body>
 </html>
