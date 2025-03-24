@@ -74,7 +74,6 @@
                 >
                   <div class="flex flex-col justify-start items-start p-2 h-60 bg-white w-full">
                     <a
-                      name="nav-sublink"
                       href="{{item.link}}"
                       class="hover:text-black hover:cursor-pointer font-black lowercase first-letter:uppercase"
                     >
@@ -84,7 +83,6 @@
                       <div class="h-auto flex flex-col mt-2">
                         {% for subLink in item.links %}
                           <a
-                            name="nav-sublink"
                             href="{{ subLink.link }}"
                             class="hover:underline hover:text-gray-800 hover:cursor-pointer font-light lowercase first-letter:uppercase"
                           >
