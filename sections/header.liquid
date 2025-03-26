@@ -158,13 +158,13 @@
     id="mobile-menu"
     data-open="false"
     data-bound="mobile-menu"
-    class="absolute top-1 w-full z-10"
+    class="absolute top-1 left-0 w-full z-10"
     >
     <div class="flex justify-center w-full">
       <div class="flex bg-white w-[97%] rounded-lg border border-gray-300 drop-shadow-xl">
         <div class="flex flex-col w-full p-4">
           <div class="flex py-4 justify-between border border-transparent border-b-gray-200">
-            <p>{{ section.settings.mobile_menu_title }}</p>
+            <p>{{ shop.name }}</p>
             <button onClick="toggleMenu('mobile-menu')" class="close-button">
               {% render "icon-close" %}
             </button>
@@ -256,13 +256,6 @@
  {
     "name": "Header",
     "settings": [
-      {
-        "type": "text",
-        "id": "mobile_menu_title",
-        "label": "Title",
-        "default": "Header",
-        "info": "This is the title of mobile menu window",
-      },
       {
         "type": "link_list",
         "id": "menu",
