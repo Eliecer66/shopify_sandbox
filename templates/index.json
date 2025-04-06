@@ -25,10 +25,66 @@
         "featured_collection": "all",
         "number_of_products_to_show": 3
       }
+    },
+    "template_main_products_E6nijx": {
+      "type": "template-main-products",
+      "blocks": {
+        "left_product_FxGm8Q": {
+          "type": "left_product",
+          "settings": {
+            "desc_text": "HELMS Boots",
+            "left_img": "shopify://shop_images/Boots.webp",
+            "left_url": "shopify://products/el-filandes-negro"
+          }
+        },
+        "right_product_AEGcGf": {
+          "type": "right_product",
+          "settings": {
+            "desc_text": "HELMS Shoes",
+            "right_img": "shopify://shop_images/shoes.webp",
+            "right_url": "shopify://products/the-bradley-burgundy"
+          }
+        }
+      },
+      "block_order": [
+        "left_product_FxGm8Q",
+        "right_product_AEGcGf"
+      ],
+      "settings": {
+        "section_title": "Principales productos"
+      }
+    },
+    "contact_form_6eXy4L": {
+      "type": "contact-form",
+      "settings": {
+        "title": "Contact us"
+      }
+    },
+    "template_blog_home_ePT6PD": {
+      "type": "template-blog-home",
+      "settings": {
+        "title": "Blog posts",
+        "first_article": "news/mis-botas",
+        "second_article": "news/bring-relief-with-accessible-and-easy-to-action-courses",
+        "third_article": "news/the-last-block-post"
+      }
+    },
+    "template_about_pfeBxG": {
+      "type": "template-about",
+      "settings": {
+        "about_image": "shopify://shop_images/legs.webp",
+        "about_content": "Our loyalty program rewards you with every purchase and unlocks exclusive access to new products and HELM experiences. Make any purchase and you can join the Crew by signing up for an account. Your points will be waiting for you. Once you've spent more than $600 with us, you'll become a member of the HELMSMEN, our VIP loyalty tier.",
+        "about_url": "shopify://pages/about-us",
+        "about_title": "About The HELM Crew"
+      }
     }
   },
   "order": [
     "banner",
-    "featured-collection"
+    "featured-collection",
+    "template_main_products_E6nijx",
+    "contact_form_6eXy4L",
+    "template_blog_home_ePT6PD",
+    "template_about_pfeBxG"
   ]
 }
