@@ -3,34 +3,36 @@
 {% assign  button_title = section.settings.button_title %}
 {% assign  button_url = section.settings.button_url %}
 
-<div class="flex w-full relative">
+<div class="flex w-full relative h-full">
   {% if banner_img == blank %}
-    {{ "hero-apparel-1" | placeholder_svg_tag: "w-full h-80 object-cover bg-gray-100" }}
+    {{ "hero-apparel-1" | placeholder_svg_tag: "w-full lg:h-80 h-screen object-cover bg-gray-100 xl:h-[720px]" }}
   {% else %}
     <img
       src="{{ banner_img | image_url }}"
       width="auto"
       height="auto"
-      class="object-cover min-h-[40rem] w-full lg:h-screen"
+      class="object-cover min-h-[40rem] w-full xl:h-[720px]"
     >
   {% endif %}
   <div
-    class="absolute flex h-full w-full lg:h-full items-center"
+    class="absolute bg-[#0000005e] flex h-full w-full lg:h-full items-center"
   >
     <div
-      class="w-full bg-[#0000005e] h-full flex flex-col lg:items-start items-center lg:justify-center justify-center lg:pl-24 gap-6"
+      class="w-full"
     >
-      <p
-        class="text-white lg:text-5xl text-4xl p-2 lg:text-start text-center w-full font-bold font-serif"
-      >
-        {{ banner_title }}
-      </p>
-      <a
-        href="{{ button_url }}"
-        class="hover:cursor-pointer hover:bg-gray-200 border text-sm px-6 py-2 uppercase bg-white font-bold"
-      >
-        {{ button_title }}
-      </a>
+      <div class="responsive__container h-full flex flex-col lg:items-start items-center lg:justify-center justify-center lg:pl-24 gap-6">
+        <p
+          class="text-white lg:text-5xl text-4xl p-2 lg:text-start text-center w-full font-bold font-serif"
+        >
+          {{ banner_title }}
+        </p>
+        <a
+          href="{{ button_url }}"
+          class="hover:cursor-pointer hover:bg-gray-200 border text-sm px-6 py-2 uppercase bg-white font-bold"
+        >
+          {{ button_title }}
+        </a>
+      </div>
     </div>
 
   </div>

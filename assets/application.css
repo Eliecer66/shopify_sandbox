@@ -1775,6 +1775,11 @@ video {
     font-size: 1rem;
     line-height: 1.75rem;
   }
+
+  .md\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -1792,6 +1797,10 @@ video {
 
   .lg\:h-screen {
     height: 100vh;
+  }
+
+  .lg\:h-\[720px\] {
+    height: 720px;
   }
 
   .lg\:max-h-\[400px\] {
@@ -1920,6 +1929,10 @@ video {
 }
 
 @media (min-width: 1280px) {
+  .xl\:h-\[720px\] {
+    height: 720px;
+  }
+
   .xl\:gap-x-8 {
     -moz-column-gap: 2rem;
          column-gap: 2rem;

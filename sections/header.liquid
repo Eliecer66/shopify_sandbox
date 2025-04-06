@@ -5,248 +5,252 @@
 
 <div
   id="navbar"
-  class="flex box-border fixed z-20 justify-between w-full items-center p-2 responsive__container "
+  class="fixed z-20 w-full"
   style="background-color: transparent;"
 >
-  <div class="px-4 py-2 relative" >
-    {% if section.settings.logo_image %}
-      <a
-        href="/"
-        class="hover:cursor-pointer"
-      >
-        <img
-          id="nav-logo"
-          alt="{{ section.settings.logo_image.alt }}"
-          width="{{ section.settings.logo_size }}"
-          height="auto"
-          src="{{ section.settings.logo_image | image_url: width: 1500 }}"
-        >
-      </a>
-      {% else %}
+  <div
+    class="responsive__container flex box-border justify-between w-full items-center p-2"
+  >
+    <div class="px-4 py-2 relative" >
+      {% if section.settings.logo_image %}
         <a
           href="/"
           class="hover:cursor-pointer"
         >
-           <img
-               id="nav-logo"
-               width="{{ section.settings.logo_size }}"
-               height="auto"
-               alt="{{ shop.name }}"
-               src="{{ "npLogo.png" | asset_img_url }}"
-            />
-          </a>
-      {% endif %}
-  </div>
-  <div class="px-4 py-2 flex md:hidden">
-    <button onClick="toggleMenu('mobile-menu')" type="button" >
-      {% render "icon-menu" %}
-    </button>
-  </div>
-    <nav
-      id="nav-txt"
-      class="hidden gap-4 md:flex "
-      style="color: black; font-family: lato;"
-    >
-    {% for link in main_menu_linklist %}
-      {% if link.links != blank %}
-        <div class="flex flex-col justify-center items-center link-container ">
-          <button
+          <img
+            id="nav-logo"
+            alt="{{ section.settings.logo_image.alt }}"
+            width="{{ section.settings.logo_size }}"
+            height="auto"
+            src="{{ section.settings.logo_image | image_url: width: 1500 }}"
+          >
+        </a>
+        {% else %}
+          <a
+            href="/"
+            class="hover:cursor-pointer"
+          >
+             <img
+                 id="nav-logo"
+                 width="{{ section.settings.logo_size }}"
+                 height="auto"
+                 alt="{{ shop.name }}"
+                 src="{{ "npLogo.png" | asset_img_url }}"
+              />
+            </a>
+        {% endif %}
+    </div>
+    <div class="px-4 py-2 flex md:hidden">
+      <button onClick="toggleMenu('mobile-menu')" type="button" >
+        {% render "icon-menu" %}
+      </button>
+    </div>
+      <nav
+        id="nav-txt"
+        class="hidden gap-4 md:flex "
+        style="color: black; font-family: lato;"
+      >
+      {% for link in main_menu_linklist %}
+        {% if link.links != blank %}
+          <div class="flex flex-col justify-center items-center link-container ">
+            <button
+              name="nav-sublink"
+              id="button-{{link.title}}"
+              type="button"
+              onclick="toggleMenu('{{link.title}}')"
+              class="desktop-menu sub-links flex items-center gap-1 justify-center uppercase font-bold"
+            >
+              {{ link.title }}
+              {% render "icon-chevron-down" %}
+            </button>
+            <drop-down-menu
+              hidden
+              id="{{ link.title }}"
+              data-open="false"
+              data-bound="{{ link.title }}"
+              class="absolute top-[85%] left-0 border font-bold uppercase z-10 w-full h-auto"
+            >
+              <div class="flex justify-center items-start w-full h-auto bg-white">
+                {% for item in link.links %}
+                  <div
+                    class="bg-white flex flex-col text-gray-500 p-4 w-full max-h-64"
+                  >
+                    <div class="flex flex-col justify-start items-start p-2 h-60 bg-white w-full">
+                      <a
+                        href="{{item.link}}"
+                        class="hover:text-black hover:cursor-pointer font-black lowercase first-letter:uppercase"
+                      >
+                        {{item.title}}
+                      </a>
+                      {% if item.links != blank %}
+                        <div class="h-auto flex flex-col mt-2">
+                          {% for subLink in item.links %}
+                            <a
+                              href="{{ subLink.link }}"
+                              class="hover:underline hover:text-gray-800 hover:cursor-pointer font-light lowercase first-letter:uppercase"
+                            >
+                              {{ subLink.title }}
+                            </a>
+                          {% endfor %}
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+                {% endfor%}
+                <div class="flex pt-8 pr-8 pb-2 items-start h-full" >
+                  {% for block in section.blocks %}
+                    <a
+                      class="p-2"
+                      href="{{ collections[block.settings.handler_collection].url }}"
+                    >
+                      <img
+                        alt="img-{{block.title}}"
+                        width="auto"
+                        height="auto"
+                        src={{ block.settings.collection_img | image_url: width: 1000, height: 1200 }}
+                      >
+                        <p
+                          class="pt-2 lowercase text-gray-400 text-sm first-letter:uppercase"
+                        >
+                          {{ block.settings.title }}
+                        </p>
+                    </a>
+                  {% endfor %}
+                </div>
+              </div>
+            </drop-down-menu>
+          </div>
+        {% else %}
+          <a
             name="nav-sublink"
-            id="button-{{link.title}}"
-            type="button"
-            onclick="toggleMenu('{{link.title}}')"
-            class="desktop-menu sub-links flex items-center gap-1 justify-center uppercase font-bold"
+            class="text-white uppercase font-bold"
+            href="{{ link.url }}"
+            style="color: black"
           >
             {{ link.title }}
-            {% render "icon-chevron-down" %}
-          </button>
-          <drop-down-menu
-            hidden
-            id="{{ link.title }}"
-            data-open="false"
-            data-bound="{{ link.title }}"
-            class="absolute top-[85%] left-0 border font-bold uppercase z-10 w-full h-auto"
-          >
-            <div class="flex justify-center items-start w-full h-auto bg-white">
-              {% for item in link.links %}
-                <div
-                  class="bg-white flex flex-col text-gray-500 p-4 w-full max-h-64"
-                >
-                  <div class="flex flex-col justify-start items-start p-2 h-60 bg-white w-full">
-                    <a
-                      href="{{item.link}}"
-                      class="hover:text-black hover:cursor-pointer font-black lowercase first-letter:uppercase"
-                    >
-                      {{item.title}}
-                    </a>
-                    {% if item.links != blank %}
-                      <div class="h-auto flex flex-col mt-2">
-                        {% for subLink in item.links %}
-                          <a
-                            href="{{ subLink.link }}"
-                            class="hover:underline hover:text-gray-800 hover:cursor-pointer font-light lowercase first-letter:uppercase"
-                          >
-                            {{ subLink.title }}
-                          </a>
-                        {% endfor %}
-                      </div>
-                    {% endif %}
-                  </div>
-                </div>
-              {% endfor%}
-              <div class="flex pt-8 pr-8 pb-2 items-start h-full" >
-                {% for block in section.blocks %}
-                  <a
-                    class="p-2"
-                    href="{{ collections[block.settings.handler_collection].url }}"
-                  >
-                    <img
-                      alt="img-{{block.title}}"
-                      width="auto"
-                      height="auto"
-                      src={{ block.settings.collection_img | image_url: width: 1000, height: 1200 }}
-                    >
-                      <p
-                        class="pt-2 lowercase text-gray-400 text-sm first-letter:uppercase"
-                      >
-                        {{ block.settings.title }}
-                      </p>
-                  </a>
-                {% endfor %}
-              </div>
-            </div>
-          </drop-down-menu>
-        </div>
-      {% else %}
-        <a
-          name="nav-sublink"
-          class="text-white uppercase font-bold"
-          href="{{ link.url }}"
-          style="color: black"
-        >
-          {{ link.title }}
-        </a>
-      {% endif %}
-    {% endfor %}
-  </nav>
-  <div class="hidden md:flex gap-2 text-white font-bold px-8 py-2">
-    <button
-      type="button"
-      class="whitespace-nowrap text-base text-white hover:text-gray-400"
-      onclick="toggleSearch('search')"
-    >
-      {% render "icon-search" %}
-    </button>
-    <a href="{{ routes.cart_url }}" >
-      {% render "icon-shopping-bag" %}
-    </a>
-    {% if customer %}
-      <a
-        href="{{routes.account_url}}"
-        name="nav-sublink"
+          </a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+    <div class="hidden md:flex gap-2 text-white font-bold px-8 py-2">
+      <button
+        type="button"
+        class="whitespace-nowrap text-base text-white hover:text-gray-400"
+        onclick="toggleSearch('search')"
       >
-        Hello, {{ customer.first_name }}
+        {% render "icon-search" %}
+      </button>
+      <a href="{{ routes.cart_url }}" >
+        {% render "icon-shopping-bag" %}
       </a>
-    {% else %}
-      <a name="nav-sublink" href="{{ routes.account_login_url }}" >Login</a>
-      <a name="nav-sublink" href="{{ routes.account_register_url }}" >Register</a>
-    {% endif %}
-  </div>
-  <!-- Mobile menu -->
-  <drop-down-menu
-    hidden
-    id="mobile-menu"
-    data-open="false"
-    data-bound="mobile-menu"
-    class="absolute top-1 left-0 w-full z-10"
-    >
-    <div class="flex justify-center w-full">
-      <div class="flex bg-white w-[97%] rounded-lg border border-gray-300 drop-shadow-xl">
-        <div class="flex flex-col w-full p-4">
-          <div class="flex py-4 justify-between border border-transparent border-b-gray-200">
-            <p>{{ shop.name }}</p>
-            <button onClick="toggleMenu('mobile-menu')" class="close-button">
-              {% render "icon-close" %}
-            </button>
-          </div>
-          <div class="flex flex-col gap-2 py-2">
-            {% for link in main_menu_linklist %}
-              {% if link.links != blank %}
-                <div class="flex items-center justify-between">
-                  <a
-                    class="text-gray-500 hover:text-gray-900"
-                    href="{{link.link}}"
+      {% if customer %}
+        <a
+          href="{{routes.account_url}}"
+          name="nav-sublink"
+        >
+          Hello, {{ customer.first_name }}
+        </a>
+      {% else %}
+        <a name="nav-sublink" href="{{ routes.account_login_url }}" >Login</a>
+        <a name="nav-sublink" href="{{ routes.account_register_url }}" >Register</a>
+      {% endif %}
+    </div>
+    <!-- Mobile menu -->
+    <drop-down-menu
+      hidden
+      id="mobile-menu"
+      data-open="false"
+      data-bound="mobile-menu"
+      class="absolute top-1 left-0 w-full z-10"
+      >
+      <div class="flex justify-center w-full">
+        <div class="flex bg-white w-[97%] rounded-lg border border-gray-300 drop-shadow-xl">
+          <div class="flex flex-col w-full p-4">
+            <div class="flex py-4 justify-between border border-transparent border-b-gray-200">
+              <p>{{ shop.name }}</p>
+              <button onClick="toggleMenu('mobile-menu')" class="close-button">
+                {% render "icon-close" %}
+              </button>
+            </div>
+            <div class="flex flex-col gap-2 py-2">
+              {% for link in main_menu_linklist %}
+                {% if link.links != blank %}
+                  <div class="flex items-center justify-between">
+                    <a
+                      class="text-gray-500 hover:text-gray-900"
+                      href="{{link.link}}"
+                    >
+                      {{link.title}}
+                    </a>
+                      <button
+                        onClick="toggleMenu('sub-menu')"
+                        class="sub-menu"
+                        type="button">
+                        {% render "icon-chevron-down" %}
+                      </button>
+                  </div>
+                  <drop-down-menu
+                    hidden
+                    id="sub-menu"
+                    data-open="false"
+                    data-bound="sub-menu"
                   >
-                    {{link.title}}
-                  </a>
-                    <button
-                      onClick="toggleMenu('sub-menu')"
-                      class="sub-menu"
-                      type="button">
-                      {% render "icon-chevron-down" %}
-                    </button>
-                </div>
-                <drop-down-menu
-                  hidden
-                  id="sub-menu"
-                  data-open="false"
-                  data-bound="sub-menu"
-                >
-                  {% for subLinks in link.links %}
-                    <div class="ml-3">
-                      <a
-                        class="font-thin"
-                        href="{{subLinks.link}}"
-                      >
-                        {{subLinks.title}}
-                      </a>
-                    </div>
-                  {% endfor %}
-                </drop-down-menu>
-              {% else %}
-                <div>
-                  <a class="text-gray-500 hover:text-gray-900" href="{{link.link}}">{{link.title}}</a>
-                </div>
-              {% endif %}
-            {% endfor%}
+                    {% for subLinks in link.links %}
+                      <div class="ml-3">
+                        <a
+                          class="font-thin"
+                          href="{{subLinks.link}}"
+                        >
+                          {{subLinks.title}}
+                        </a>
+                      </div>
+                    {% endfor %}
+                  </drop-down-menu>
+                {% else %}
+                  <div>
+                    <a class="text-gray-500 hover:text-gray-900" href="{{link.link}}">{{link.title}}</a>
+                  </div>
+                {% endif %}
+              {% endfor%}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </drop-down-menu>
-  <search-bar
-    id="search"
-    data-open="false"
-    class="absolute h-full top-0 left-0 z-50 bg-white w-full border"
-  >
-    <div class="flex justify-center gap-2 items-center h-full">
-      <button
-        class="absolute right-0 top-0 p-2"
-        onclick="toggleSearch('search')"
-      >
-        {% render 'icon-close' %}
-      </button>
-        <form
-          class="flex items-center gap-2"
-          method="get"
-          action="{{ routes.search_url }}"
-        >
-        <input
-          name="q"
-          type="search"
-          placeholder="Search"
-          class="border border-black rounded-md p-2"
-        >
+    </drop-down-menu>
+    <search-bar
+      id="search"
+      data-open="false"
+      class="absolute h-full top-0 left-0 z-50 bg-white w-full border"
+    >
+      <div class="flex justify-center gap-2 items-center h-full">
         <button
-          type="submit"
-          class="flex h-auto items-center"
+          class="absolute right-0 top-0 p-2"
           onclick="toggleSearch('search')"
         >
-          {% render "icon-search", dark: true %}
+          {% render 'icon-close' %}
         </button>
-      </form>
-    </div>
-  </search-bar>
+          <form
+            class="flex items-center gap-2"
+            method="get"
+            action="{{ routes.search_url }}"
+          >
+          <input
+            name="q"
+            type="search"
+            placeholder="Search"
+            class="border border-black rounded-md p-2"
+          >
+          <button
+            type="submit"
+            class="flex h-auto items-center"
+            onclick="toggleSearch('search')"
+          >
+            {% render "icon-search", dark: true %}
+          </button>
+        </form>
+      </div>
+    </search-bar>
+  </div>
 </div>
 
 <script src="{{ "drop-down-menu.js" | asset_url }}" defer ></script>
