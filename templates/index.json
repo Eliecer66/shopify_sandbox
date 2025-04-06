@@ -54,12 +54,6 @@
         "section_title": "Principales productos"
       }
     },
-    "contact_form_6eXy4L": {
-      "type": "contact-form",
-      "settings": {
-        "title": "Contact us"
-      }
-    },
     "template_blog_home_ePT6PD": {
       "type": "template-blog-home",
       "settings": {
@@ -77,14 +71,20 @@
         "about_url": "shopify://pages/about-us",
         "about_title": "About The HELM Crew"
       }
+    },
+    "contact_form_6eXy4L": {
+      "type": "contact-form",
+      "settings": {
+        "title": "Contact us"
+      }
     }
   },
   "order": [
     "banner",
     "featured-collection",
     "template_main_products_E6nijx",
-    "contact_form_6eXy4L",
     "template_blog_home_ePT6PD",
-    "template_about_pfeBxG"
+    "template_about_pfeBxG",
+    "contact_form_6eXy4L"
   ]
 }
