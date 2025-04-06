@@ -1,0 +1,103 @@
+{% assign first_image = section.settings.first_article.image %}
+{% assign second_image = section.settings.second_article.image %}
+{% assign third_image = section.settings.third_article.image %}
+
+<div class="lg:py-16 flex flex-col justify-center items-center h-full w-ful gap-14" >
+  <div class="text-3xl font-serif text-gray-700"> {{ section.settings.title }}</div>
+  <div class="flex lg:flex-row flex-col justify-evenly items-center w-full gap-4">
+    <a
+      href="{{section.settings.first_article.url}}"
+      class="flex flex-col gap-2 border lg:max-w-[400px] max-w-[350px] p-4 rounded-sm lg:max-h-[400px]"
+    >
+      {% if first_image != blank %}
+        <img
+          width="auto"
+          height="auto"
+          src="{{ section.settings.first_article.image | image_url }}"
+          class="h-56 w-full object-cover"
+        />
+      {% else%}
+        {{ "product-1" | placeholder_svg_tag: "w-full h-56"}}
+      {% endif%}
+      <div class="flex flex-col gap-2">
+        <p class="text-xl text-gray-800" > {{ section.settings.first_article.title }} </p>
+        <p class="text-sm/6 text-gray-600" > {{ section.settings.first_article.excerpt_or_content | truncate: 150  }} </p>
+        <cap class="text-xs text-gray-600" >{{ section.settings.first_article.created_at | date: '%B %d, %Y' }}</cap>
+      </div>
+    </a>
+    <a
+      href="{{ section.settings.second_article.url}}"
+      class="flex flex-col gap-2 border lg:max-w-[400px] max-w-[350px] p-4 rounded-sm max-h-[400px]"
+      >
+      {% if second_image != blank %}
+        <img
+          width="auto"
+          height="auto"
+          src="{{ section.settings.second_article.image | image_url }}"
+          class="h-56 w-full object-cover"
+        />
+      {% else %}
+        {{ "product-2" | placeholder_svg_tag: "w-full h-56"}}
+      {% endif%}
+      <div class="flex flex-col gap-2">
+        <p class="text-xl text-gray-800"> {{ section.settings.second_article.title }} </p>
+        <p class="text-sm/6 text-gray-600 "> {{ section.settings.second_article.excerpt_or_content | truncate: 150  }} </p>
+        <cap class="text-xs text-gray-600">{{ section.settings.second_article.created_at | date: '%B %d, %Y' }}</cap>
+      </div>
+    </a>
+    <a
+      href={{ section.settings.third_article }}
+      class="flex flex-col gap-2 border lg:max-w-[400px] max-w-[350px] p-4 rounded-sm max-h-[400px]"
+    >
+      {% if third_image != blank %}
+        <img
+          width="auto"
+          height="auto"
+          src="{{ section.settings.third_article.image | image_url }}"
+          class="h-56 w-full object-cover"
+        />
+      {% else %}
+        {{ "product-3" | placeholder_svg_tag: "w-full h-56" }}
+      {% endif %}
+      <div class="flex flex-col gap-2">
+        <p class="text-xl text-gray-800"> {{ section.settings.third_article.title }} </p>
+        <p class="text-sm/6 text-gray-600 "> {{ section.settings.third_article.excerpt_or_content | truncate: 150  }} </p>
+        <cap class="text-xs text-gray-600" > {{ section.settings.third_article.created_at | date: '%B %d, %Y' }}</cap>
+      </div>
+    </a>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Blog posts",
+    "presets": [
+      {
+        "name": "Blog section"
+      }
+    ],
+    "settings": [
+      {
+        "type": "text",
+        "label": "Blog posts",
+        "id": "title",
+        "default": "Blog posts"
+      },
+      {
+        "type": "article",
+        "label": "First article",
+        "id": "first_article",
+      },
+      {
+        "type": "article",
+        "label": "Second article",
+        "id": "second_article",
+      },
+      {
+        "type": "article",
+        "label": "Third article",
+        "id": "third_article",
+      }
+    ]
+  }
+{% endschema %}

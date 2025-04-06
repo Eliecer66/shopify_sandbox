@@ -13,6 +13,7 @@
     {{ content_for_header }}
     <!-- Header hook for plugins -->
     {{ 'application.css' | asset_url | stylesheet_tag }}
+    {{ 'style.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'application.js' | asset_url }}" defer></script>
   </head>
   <body class="h-screen flex justify-between flex-col">

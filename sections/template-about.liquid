@@ -1,0 +1,69 @@
+{% assign image = section.settings.about_image %}
+{% assign url = section.settings.about_url %}
+{% assign content = section.settings.about_content %}
+{% assign title = section.settings.about_title %}
+
+<div class="flex w-full justify-center items-center h-full lg:py-12">
+  <div class="flex h-full items-center justify-center w-full">
+    <div class="flex lg:flex-row flex-col bg-gray-200 lg:max-w-[1100px] w-full lg:h-[430px] h-full">
+      <div class="basis-4/12 lg:p-0 p-2">
+        {% if image != blank %}
+          <img src="{{ image | image_url }}"
+          width="auto"
+          height="auto"
+          class="object-cover lg:max-w-[400px] w-full h-full"
+          />
+        {% else %}
+          {{ "blog-apparel-1" | placeholder_svg_tag: "object-cover lg:max-w-[400px] w-full h-full" }}
+        {% endif %}
+      </div>
+      <div
+        class="flex flex-col font-serif justify-evenly h-full lg:items-start lg:pl-8 lg:p-4 p-8 pl-10 basis-7/12 lg:gap-0 gap-6 lg:max-w-[1100px] w-full"
+      >
+        <p class="lg:text-3xl text-2xl text-gray-700 font-bold lg:pl-2">{{ title }}</p>
+        <p class="text-gray-500 lg:text-lg/7 text-lg/8 md:text-base/7 lg:font-normal font-semibold">{{ content }}</p>
+        <a
+          class="flex justify-center bg-gray-900 px-6 py-3 max-w-36 text-white hover:bg-gray-700"
+          href={{ url }}
+        >
+          Learn more
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "About",
+    "presets": [
+      {
+        "name": "About Section"
+      }
+    ],
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "about_image",
+        "label": "Image",
+      },
+      {
+        "type": "textarea",
+        "id": "about_content",
+        "label": "About summary",
+        "default": "Here goes the about us description."
+      },
+      {
+        "type": "url",
+        "id": "about_url",
+        "label": "About url path",
+      },
+      {
+        "type": "text",
+        "id": "about_title",
+        "label": "About title"
+      }
+
+    ]
+  }
+{% endschema %}

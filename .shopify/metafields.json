@@ -1,7 +1,6 @@
 {
   "article": [],
   "blog": [],
-  "brand": [],
   "collection": [],
   "company": [],
   "company_location": [],
@@ -185,6 +184,46 @@
       "namespace": "shopify",
       "name": "Shoe size",
       "description": "Used to define the size of footwear, e.g. Extra large (XL), 9.5",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "flat-shoe-style",
+      "namespace": "shopify",
+      "name": "Flat shoe style",
+      "description": "Identifies the specific design of flat shoes, such as ballet or espadrilles",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "care-instructions",
+      "namespace": "shopify",
+      "name": "Care instructions",
+      "description": "Provides guidance for product upkeep, such as hand wash or dry clean only",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "sneaker-style",
+      "namespace": "shopify",
+      "name": "Sneaker style",
+      "description": "Identifies the design or type of sneakers, such as athletic or high-top",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "slipper-style",
+      "namespace": "shopify",
+      "name": "Slipper style",
+      "description": "Identifies the style of slippers, such as ballerina or flip-flop",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
