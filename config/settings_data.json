@@ -12,10 +12,22 @@
     "sections": {
       "header": {
         "type": "header",
+        "blocks": {
+          "showcase_PYkUMb": {
+            "type": "showcase",
+            "settings": {
+              "title": "",
+              "handler_collection": ""
+            }
+          }
+        },
+        "block_order": [
+          "showcase_PYkUMb"
+        ],
         "settings": {
           "menu": "main-menu",
           "logo_image": "shopify://shop_images/pngwing.com_3.png",
-          "logo_size": 100
+          "logo_size": 60
         }
       },
       "footer": {
