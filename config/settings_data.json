@@ -8,7 +8,25 @@
  * ------------------------------------------------------------
  */
 {
-  "current": {},
+  "current": {
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "menu": "main-menu",
+          "logo_image": "shopify://shop_images/pngwing.com_3.png",
+          "logo_size": 100
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "footer": "footer"
+        }
+      }
+    },
+    "content_for_index": []
+  },
   "presets": {
     "Default": {}
   }
