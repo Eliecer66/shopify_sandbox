@@ -63,6 +63,14 @@
         "third_article": "news/the-last-block-post"
       }
     },
+    "featured_collection_CNQQUj": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Feature Collection",
+        "featured_collection": "botas-de-hombre",
+        "number_of_products_to_show": 3
+      }
+    },
     "template_about_pfeBxG": {
       "type": "template-about",
       "settings": {
@@ -84,6 +92,7 @@
     "template_main_products_E6nijx",
     "featured-collection",
     "template_blog_home_ePT6PD",
+    "featured_collection_CNQQUj",
     "template_about_pfeBxG",
     "contact_form_6eXy4L"
   ]
