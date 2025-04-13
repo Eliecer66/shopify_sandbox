@@ -18,14 +18,6 @@
         "button_url": ""
       }
     },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Coleccion de verano",
-        "featured_collection": "all",
-        "number_of_products_to_show": 3
-      }
-    },
     "template_main_products_E6nijx": {
       "type": "template-main-products",
       "blocks": {
@@ -34,7 +26,7 @@
           "settings": {
             "desc_text": "HELMS Boots",
             "left_img": "shopify://shop_images/Boots.webp",
-            "left_url": "shopify://products/el-filandes-negro"
+            "left_url": "shopify://products/armada-de-hynes"
           }
         },
         "right_product_AEGcGf": {
@@ -52,6 +44,14 @@
       ],
       "settings": {
         "section_title": "Principales productos"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Coleccion de verano",
+        "featured_collection": "all",
+        "number_of_products_to_show": 3
       }
     },
     "template_blog_home_ePT6PD": {
@@ -81,8 +81,8 @@
   },
   "order": [
     "banner",
-    "featured-collection",
     "template_main_products_E6nijx",
+    "featured-collection",
     "template_blog_home_ePT6PD",
     "template_about_pfeBxG",
     "contact_form_6eXy4L"
