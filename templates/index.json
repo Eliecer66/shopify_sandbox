@@ -12,18 +12,10 @@
     "banner": {
       "type": "banner",
       "settings": {
-        "banner_img": "shopify://shop_images/scotch-1500x1000-min_5a9f84a6-a1eb-4763-8595-a85f28295018.webp",
+        "banner_img": "shopify://shop_images/legs.webp",
         "banner_title": "Your New Pair Awaits...",
         "button_title": "Shop All Styles",
         "button_url": ""
-      }
-    },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Coleccion de verano",
-        "featured_collection": "all",
-        "number_of_products_to_show": 3
       }
     },
     "template_main_products_E6nijx": {
@@ -34,7 +26,7 @@
           "settings": {
             "desc_text": "HELMS Boots",
             "left_img": "shopify://shop_images/Boots.webp",
-            "left_url": "shopify://products/el-filandes-negro"
+            "left_url": "shopify://products/armada-de-hynes"
           }
         },
         "right_product_AEGcGf": {
@@ -54,6 +46,14 @@
         "section_title": "Principales productos"
       }
     },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Coleccion de verano",
+        "featured_collection": "all",
+        "number_of_products_to_show": 3
+      }
+    },
     "template_blog_home_ePT6PD": {
       "type": "template-blog-home",
       "settings": {
@@ -61,6 +61,14 @@
         "first_article": "news/mis-botas",
         "second_article": "news/bring-relief-with-accessible-and-easy-to-action-courses",
         "third_article": "news/the-last-block-post"
+      }
+    },
+    "featured_collection_CNQQUj": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Feature Collection",
+        "featured_collection": "botas-de-hombre",
+        "number_of_products_to_show": 3
       }
     },
     "template_about_pfeBxG": {
@@ -81,9 +89,10 @@
   },
   "order": [
     "banner",
-    "featured-collection",
     "template_main_products_E6nijx",
+    "featured-collection",
     "template_blog_home_ePT6PD",
+    "featured_collection_CNQQUj",
     "template_about_pfeBxG",
     "contact_form_6eXy4L"
   ]
