@@ -21,14 +21,15 @@
         "description": {
           "type": "description"
         },
-        "checkout_buttons": {
-          "type": "checkout_buttons"
+        "variant_title": {
+          "type": "variant_title"
         }
       },
       "block_order": [
         "vendor",
         "title",
         "price",
+        "variant_title",
         "variant_selector",
         "quantity",
         "description",

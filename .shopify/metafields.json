@@ -12,8 +12,8 @@
     {
       "key": "target-gender",
       "namespace": "shopify",
-      "name": "Target gender",
-      "description": "Identifies the intended gender for a product, such as female, male or unisex",
+      "name": "Sexo objetivo",
+      "description": "Identifica el sexo al que va destinado un producto, como femenino, masculino o unisex.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -22,8 +22,8 @@
     {
       "key": "watch-display",
       "namespace": "shopify",
-      "name": "Watch display",
-      "description": "Distinguishes between watch displays, such as digital or analog",
+      "name": "Pantalla de reloj",
+      "description": "Distingue las diferentes pantallas de reloj, como digital o analógica.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -32,8 +32,8 @@
     {
       "key": "age-group",
       "namespace": "shopify",
-      "name": "Age group",
-      "description": "Defines the target age range for a product, such as adults or kids",
+      "name": "Grupo de edad",
+      "description": "Define el rango de edad objetivo de un producto, como los adultos o los niños.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -42,8 +42,8 @@
     {
       "key": "band-color",
       "namespace": "shopify",
-      "name": "Band color",
-      "description": "Specifies the color of a watch band, e.g. multicolor, rose gold",
+      "name": "Color de la correa",
+      "description": "Especifica el color de la correa de un reloj, como, por ejemplo, multicolor u oro rosa.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -52,8 +52,8 @@
     {
       "key": "connectivity-technology",
       "namespace": "shopify",
-      "name": "Connectivity technology",
-      "description": "Defines the method of data transfer in a product, e.g. Bluetooth, USB",
+      "name": "Tecnología de conectividad",
+      "description": "Define el método de transferencia de datos en un producto, por ejemplo, Bluetooth o USB.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -62,8 +62,8 @@
     {
       "key": "smart-watch-features",
       "namespace": "shopify",
-      "name": "Smart watch features",
-      "description": "Describes the capabilities of a smart watch, such as fitness tracker or waterproof",
+      "name": "Características del reloj inteligente",
+      "description": "Describe las capacidades de un reloj inteligente, como un rastreador de actividad física o la resistencia al agua.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -73,7 +73,7 @@
       "key": "color-pattern",
       "namespace": "shopify",
       "name": "Color",
-      "description": "Defines the primary color or pattern, such as blue or striped",
+      "description": "Define el patrón o color primario, como las rayas o el azul.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -82,8 +82,8 @@
     {
       "key": "sleeve-length-type",
       "namespace": "shopify",
-      "name": "Sleeve length type",
-      "description": "Specifies the style of sleeves on clothing items, such as short or sleeveless",
+      "name": "Tipo de longitud de la manga",
+      "description": "Especifica el estilo de las mangas de las prendas de vestir, como mangas cortas o sin mangas.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -92,8 +92,8 @@
     {
       "key": "fabric",
       "namespace": "shopify",
-      "name": "Fabric",
-      "description": "Identifies the type of fabric used in a product, for example, cotton or denim",
+      "name": "Tejido",
+      "description": "Identifica el tipo de tejido utilizado en un producto, por ejemplo, el algodón o la lona.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -102,8 +102,8 @@
     {
       "key": "closure-type",
       "namespace": "shopify",
-      "name": "Closure type",
-      "description": "Defines the method used to fasten or secure a product, such as zipper or buckles",
+      "name": "Tipo de cierre",
+      "description": "Define el método utilizado para abrochar o sujetar un producto, como la cremallera o las hebillas.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -112,8 +112,8 @@
     {
       "key": "footwear-material",
       "namespace": "shopify",
-      "name": "Footwear material",
-      "description": "Specifies the type of material used in footwear, such as suede or rubber",
+      "name": "Material del calzado",
+      "description": "Especifica el tipo de material que se usa en el calzado, como el gamuzado o el caucho.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -122,8 +122,8 @@
     {
       "key": "toe-style",
       "namespace": "shopify",
-      "name": "Toe style",
-      "description": "Defines the shape or design of a shoe's toe, such as open or pointed",
+      "name": "Estilo de punta del calzado",
+      "description": "Define la forma o el diseño de la punta de un zapato, como abierta o puntiaguda.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -132,8 +132,8 @@
     {
       "key": "occasion-style",
       "namespace": "shopify",
-      "name": "Occasion style",
-      "description": "Helps categorize products based on occasion, e.g. casual, dress",
+      "name": "Estilo de ocasión",
+      "description": "Ayuda a categorizar los productos según la ocasión, como, por ejemplo, informal o formal.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -142,8 +142,8 @@
     {
       "key": "heel-height-type",
       "namespace": "shopify",
-      "name": "Heel height type",
-      "description": "Defines the height of a shoe's heel, such as flat or high",
+      "name": "Tipo de altura del tacón",
+      "description": "Define la altura del tacón de un zapato, como plano o alto.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -152,8 +152,8 @@
     {
       "key": "shoe-fit",
       "namespace": "shopify",
-      "name": "Shoe fit",
-      "description": "Defines the width of footwear, such as narrow or wide",
+      "name": "Ajuste del calzado",
+      "description": "Define el ancho del calzado, como estrecho o ancho.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -162,8 +162,8 @@
     {
       "key": "boot-style",
       "namespace": "shopify",
-      "name": "Boot style",
-      "description": "Specifies the style of boots, e.g. booties",
+      "name": "Estilo de bota",
+      "description": "Especifica el estilo de las botas, como, por ejemplo, los botines.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -172,8 +172,8 @@
     {
       "key": "shoe-features",
       "namespace": "shopify",
-      "name": "Shoe features",
-      "description": "Identifies special characteristics of shoes, such as waterproof or lightweight",
+      "name": "Características del zapato",
+      "description": "Identifica características especiales del calzado, como la impermeabilidad o la ligereza.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -182,8 +182,8 @@
     {
       "key": "shoe-size",
       "namespace": "shopify",
-      "name": "Shoe size",
-      "description": "Used to define the size of footwear, e.g. Extra large (XL), 9.5",
+      "name": "Talla del calzado",
+      "description": "Se utiliza para definir la talla del calzado, como, por ejemplo, extragrande (XL), 9,5.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -192,8 +192,8 @@
     {
       "key": "flat-shoe-style",
       "namespace": "shopify",
-      "name": "Flat shoe style",
-      "description": "Identifies the specific design of flat shoes, such as ballet or espadrilles",
+      "name": "Estilo de zapato plano",
+      "description": "Identifica el diseño específico de calzados planos, como de ballet o alpargatas",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -202,8 +202,8 @@
     {
       "key": "care-instructions",
       "namespace": "shopify",
-      "name": "Care instructions",
-      "description": "Provides guidance for product upkeep, such as hand wash or dry clean only",
+      "name": "Instrucciones de cuidado",
+      "description": "Proporciona directrices sobre el mantenimiento del producto, como la instrucción de lavar a mano o solo en seco.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -212,8 +212,8 @@
     {
       "key": "sneaker-style",
       "namespace": "shopify",
-      "name": "Sneaker style",
-      "description": "Identifies the design or type of sneakers, such as athletic or high-top",
+      "name": "Estilo de zapatillas",
+      "description": "Identifica el diseño o tipo de zapatillas deportivas, como de atletismo o de caña alta",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
@@ -222,8 +222,18 @@
     {
       "key": "slipper-style",
       "namespace": "shopify",
-      "name": "Slipper style",
-      "description": "Identifies the style of slippers, such as ballerina or flip-flop",
+      "name": "Estilo de pantufla",
+      "description": "Identifica el estilo de zapatillas, como ballerina o chancletas",
+      "type": {
+        "name": "list.metaobject_reference",
+        "category": "REFERENCE"
+      }
+    },
+    {
+      "key": "accessory-size",
+      "namespace": "shopify",
+      "name": "Tamaño de accesorio",
+      "description": "Define el tamaño de un producto accesorio, como de talla única o compacto.",
       "type": {
         "name": "list.metaobject_reference",
         "category": "REFERENCE"

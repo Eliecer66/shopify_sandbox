@@ -30,21 +30,21 @@
 
 </style>
 <div class="max-w-6xl mx-auto my-8 mt-24">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
     <div class="product--media">
-      <div class="hidden md:block">
-        {% for media in product.media %}
-          <div class="h-100 overflow-hidden p-2">
-            {% render "product-media", media: media %}
-          </div>
-        {% endfor %}
-      </div>
-      <div class="md:hidden">
+      <!-- <div class="hidden md:block"> -->
+      <!--   {% for media in product.media %} -->
+      <!--     <div class="h-100 overflow-hidden p-2"> -->
+      <!--       {% render "product-media", media: media %} -->
+      <!--     </div> -->
+      <!--   {% endfor %} -->
+      <!-- </div> -->
+      <div class="">
         <div class="swiper">
-          <div class="swiper-wrapper">
+          <div class="swiper-wrapper pb-10">
             {% for media in product.media %}
               <div class="swiper-slide">
-                <div class="h-[100vw] overflow-hidden p-2">
+                <div class=" max-h-[550px] overflow-hidden p-2">
                   {% render "product-media", media: media%}
                 </div>
               </div>
@@ -60,95 +60,151 @@
       {% form "product", product, id: "product-form", novalidate: "novalidate" %}
       <input type="hidden" name="id" value={{ selected_variant.id }}>
       {% for block in section.blocks %}
-        {% case block.type }
-          {% when "vendor" %}
-            <div class="my-3">
-              <span class="text-xs text-gray-500"> {{ product.vendor }} </span>
-            </div>
-          {% when "title" %}
-            <div class="my-3">
-              <h1 class="text-3xl text-gray-900">
-                {{ product.title }}
-              </h1>
-            </div>
-          {% when "price" %}
-            <div class="my-3" id="price-{{ section.id }}">
-              <span class="text-base text-gray-500 line-through" >{{ selected_variant.compare_at_price | money }} </span>
-              <span class="text-lg text-gray-900" >{{ selected_variant.price | money }} </span>
-              {% if selected_variant.price < selected_variant.compare_at_price %}
-                <span class="px-5 py-1 text-sm font-bold bg-red-900 rounded-full text-white mx-4" >Sale</span>
-              {% endif %}
-            </div>
-          {% when "variant_selector" %}
-            <div class="my-3" >
-              {% unless product.has_only_default_variant %}
-                <variant-selector data-url="{{ product.url }}" data-section="{{ section.id }}" >
-                {% for option in product.options_with_values %}
-                  <label for="Option-{{ section.id }}-{{ forloop.index0 }}"> {{ option.name }} </label>
-                  <div class="my-2" >
-                    <select
-                      name="options[{{ option.name | escape }}]"
-                      id="Option-{{ section.id }}-{{ forloop.index0 }}"
-                      class="w-full border px-3 py-1"
-                      >
-                      {% for value in option.values %}
-                        <option
-                        value="{{ value | escape }}"
-                        {% if option.selected_value == value %}
-                          selected="selected"
-                        {% endif%}
-                        >
-                        {{ value }}
-                        </option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                    <script type="application/json" >
-                      {{ product.variants | json }}
-                    </script>
-                  {% endfor %}
-                </variant-selector>
-                {% endunless %}
-            </div>
-          {% when "quantity" %}
-            <div class="my-3">
-              <label for="Quantity-{{ section.id }}"> Quantity </label>
-              <div class="my-2">
-                <input
-                class="w-full border px-3 py-3"
-                type="number"
-                name="quantity"
-                id="quantity-{{ section.id }}"
-                value="1"
-                min="1"
-                >
+        <div class="flex flex-col justify-evenly items-start h-full w-full gap-2">
+          {% case block.type %}
+            {% when "vendor" %}
+              <div class="my-3 flex justify-center w-full">
+                <span class="text-gray-700"> {{ product.vendor }} </span>
               </div>
-            </div>
-          {% when "description" %}
-            <div class="my-3">
-              <p class="text-gray-700">
-              {{ product.description }}
-              </p>
-            </div>
-          {% when "checkout_buttons" %}
-            <div class="my-3">
-              <button
-                type="submit"
-                name="add"
-                class="w-full px-6 py-4 bg-gray-900 text-white hover:bg-gray-700 rounde-sm my-2"
-                {% if product.selected_or_first_available_variant.available == false %}
-                  disabled
-                {% endif %}
+            {% when "title" %}
+              <div class="my-3 flex justify-center w-full">
+                <h2
+                  style="font-size: {{ block.settings.font_size }}px"
+                  class="text-gray-700 font-serif"
                 >
-                {% if product.selected_or_first_available_variant.available == false %}
-                  Sold out
-                {% else %}
-                  Add to cart
+                  {{ product.title }}
+                </h2>
+              </div>
+            {% when "price" %}
+              <div
+                class="my-3 flex justify-center gap-2 items-center w-full h-full p-2 font-serif"
+                id="price-{{ section.id }}"
+              >
+                <span class="text-2xl text-gray-500 line-through" >{{ selected_variant.compare_at_price | money }} </span>
+                <span class="text-3xl text-gray-900" >{{ selected_variant.price | money }} </span>
+                {% if selected_variant.price < selected_variant.compare_at_price %}
+                  <span class="px-5 py-1 text-sm font-bold bg-gray-800 rounded-full text-white mx-4" >Sale</span>
                 {% endif %}
-              </button>
-            </div>
-          {% else %}
-        {% endcase %}
+              </div>
+              {% when "variant_title" %}
+                <div class="w-full flex justify-center">
+                  <p class="text-xl text-gray-600 font-serif"> {{ block.settings.variant_title }} </p>
+                </div>
+            {% when "variant_selector" %}
+              <div class="my-3 w-full" >
+                {% unless product.has_only_default_variant %}
+                  <variant-selector
+                    data-url="{{ product.url }}"
+                    data-section="{{ section.id }}"
+                  >
+                    {% for option in product.options_with_values %}
+                      {% if option.name == "Color" %}
+                        <div class="my-2 flex gap-2 pl-4 w-full justify-center">
+                          {% for color in option.values %}
+                            {% if color.swatch.image %}
+                              <div
+                                class="hover:cursor-pointer"
+                                onclick="changeItemColor('{{ color.name | downcase }}', '{{ option.selected_value | downcase }}')"
+                              >
+                                <img
+                                  src="{{ color.swatch.image | image_url }}"
+                                  width="auto"
+                                  height="auto"
+                                  class="w-20 h-20"
+                                />
+                              </div>
+                            {% else %}
+                              <div
+                                class="rounded-full w-12 h-12 p-[2px]"
+                                {% if color.selected %}
+                                    style="border: 1px solid DimGrey;"
+                                {% endif %}
+                              >
+                                <div
+                                  class="hover:cursor-pointer rounded-full w-full h-full"
+                                  style="background-color: {{ color.swatch.color }};"
+                                  onclick="changeItemColor('{{ color.name | downcase }}', '{{ option.selected_value | downcase }}')"
+                                >
+                                </div>
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                        </div>
+                        {% else %}
+                          <label
+                            id="{{ option.name | escape }}"
+                            name="{{ option.name }}"
+                            class="text-lg font-serif"
+                            for="Option-{{ section.id }}-{{ forloop.index0 }}"
+                          >
+                            {{ option.name }}: {{ option.selected_value }}
+                          </label>
+                          <div class="my-2 w-full" >
+                            <select
+                              name="options[{{ option.name | escape }}]"
+                              id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                              class="w-full border px-3 py-1"
+                            >
+                              {% for value in option.values %}
+                                <option
+                                  value="{{ value | escape }}"
+                                  {% if option.selected_value == value %}
+                                    selected="selected"
+                                  {% endif%}
+                                >
+                                  {{ value }}
+                                </option>
+                              {% endfor %}
+                            </select>
+                          </div>
+                        {% endif%}
+                      {% endfor %}
+                      <script type="application/json" >
+                        {{ product.variants | json }}
+                      </script>
+                  </variant-selector>
+              {% endunless %}
+              </div>
+            {% when "quantity" %}
+              <div class="my-3">
+                <label for="Quantity-{{ section.id }}"> Quantity </label>
+                <div class="my-2">
+                  <input
+                    class="w-full border px-3 py-3"
+                    type="number"
+                    name="quantity"
+                    id="quantity-{{ section.id }}"
+                    value="1"
+                    min="1"
+                  >
+                </div>
+              </div>
+            {% when "description" %}
+              <div class="my-3">
+                <p class="text-gray-700">
+                {{ product.description }}
+                </p>
+              </div>
+            {% when "checkout_buttons" %}
+              <div class="my-3">
+                <button
+                  type="submit"
+                  name="add"
+                  class="w-full px-6 py-4 bg-gray-900 text-white hover:bg-gray-700 rounde-sm my-2"
+                  {% if product.selected_or_first_available_variant.available == false %}
+                    disabled
+                  {% endif %}
+                >
+                  {% if product.selected_or_first_available_variant.available == false %}
+                    Sold out
+                  {% else %}
+                    Add to cart
+                  {% endif %}
+                </button>
+              </div>
+            {% else %}
+          {% endcase %}
+        </div>
       {% endfor %}
       {% endform %}
     </div>
@@ -170,13 +226,19 @@
         this.updateURL();
         this.updateFormID();
         this.updatePrice();
+        this.updatePlaceholder()
       }
+    }
+
+    updatePlaceholder() {
+      this.labelOption.innerHTML = `${this.labelOption.id}: ${this.options[0]}`
     }
 
     getSelectedOptions() {
       this.options = Array
         .from(this.querySelectorAll("select"), (select) => select.value)
-      console.log(this.options);
+      this.labelsOptions = Array
+          .from(this.querySelectorAll("label"), (select) => select)
     }
 
     // This get from the product data the information needed
@@ -188,15 +250,27 @@
     getSelectedVariant() {
       this.currentVariant = this.getVariantJSON()
         .find((variant) => {
-          const findings = !variant.options
+          const findings = variant.options
             .map((option, index) => {
-              return this.options[index] === option;
-            })
-            .includes(false)
+              let match = false;
+              this.options.forEach((data) => {
+                if (data === option) {
+                  match = true;
+                  if (this.labelsOptions.length > 1) {
+                    this.labelOption = this.labelsOptions[index];
+                  } else {
+                    this.labelOption = this.labelsOptions[0];
+                  }
+                }
+              })
+              return match;
+            }).includes(true)
+
+          console.log(variant)
           if (findings) return variant;
-        }
-        )
-      console.log(this.currentVariant);
+        })
+
+      console.log(this.currentVariant)
     }
 
     updateURL() {
@@ -247,6 +321,16 @@
   })
 </script>
 
+<script>
+  function changeItemColor(newColor, old) {
+    console.log(newColor, old)
+    const url = document.URL;
+    const composeURL = url.slice(0, url.lastIndexOf('/')) + `/${newColor}`
+    const newURL = document.URL.replace(old, newColor);
+    window.location.href = composeURL;
+  }
+
+</script>
 {% schema %}
   {
     "name":"Product",
@@ -262,7 +346,19 @@
       },{
         "type": "title",
         "name": "Title",
-        "limit": 1
+        "limit": 1,
+        "settings": [
+          {
+            "id": "font_size",
+            "type": "range",
+            "min": 50,
+            "max": 100,
+            "unit": "px",
+            "label": "Size",
+            "default": 50,
+            "step": 10
+          }
+        ]
       },{
         "type": "variant_selector",
         "name": "Variant Selector",
@@ -279,6 +375,18 @@
         "type": "checkout_buttons",
         "name": "Checkout Buttons",
         "limit": 1
+      }, {
+        "type": "variant_title",
+        "name": "Variant Title",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "variant_title",
+            "label": "Variant Title",
+            "default": "Also Comes In: "
+          }
+        ]
       }
     ]
   }

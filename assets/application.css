@@ -833,6 +833,10 @@ video {
   height: 1.5rem;
 }
 
+.h-12 {
+  height: 3rem;
+}
+
 .h-20 {
   height: 5rem;
 }
@@ -857,10 +861,6 @@ video {
   height: 20rem;
 }
 
-.h-\[100vw\] {
-  height: 100vw;
-}
-
 .h-auto {
   height: auto;
 }
@@ -881,6 +881,14 @@ video {
   max-height: 400px;
 }
 
+.max-h-\[450px\] {
+  max-height: 450px;
+}
+
+.max-h-\[550px\] {
+  max-height: 550px;
+}
+
 .min-h-80 {
   min-height: 20rem;
 }
@@ -899,6 +907,10 @@ video {
 
 .w-10\/12 {
   width: 83.333333%;
+}
+
+.w-12 {
+  width: 3rem;
 }
 
 .w-20 {
@@ -1194,6 +1206,11 @@ video {
   background-color: rgb(55 65 81 / var(--tw-bg-opacity, 1));
 }
 
+.bg-gray-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
+}
+
 .bg-gray-900 {
   --tw-bg-opacity: 1;
   background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
@@ -1219,11 +1236,6 @@ video {
   background-color: rgb(185 28 28 / var(--tw-bg-opacity, 1));
 }
 
-.bg-red-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(127 29 29 / var(--tw-bg-opacity, 1));
-}
-
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
@@ -1245,6 +1257,10 @@ video {
 
 .p-1 {
   padding: 0.25rem;
+}
+
+.p-10 {
+  padding: 2.5rem;
 }
 
 .p-12 {
@@ -1269,6 +1285,14 @@ video {
 
 .p-8 {
   padding: 2rem;
+}
+
+.p-\[2px\] {
+  padding: 2px;
+}
+
+.p-6 {
+  padding: 1.5rem;
 }
 
 .px-1 {
@@ -1354,6 +1378,10 @@ video {
   padding-left: 2.5rem;
 }
 
+.pl-4 {
+  padding-left: 1rem;
+}
+
 .pr-8 {
   padding-right: 2rem;
 }
@@ -1364,6 +1392,18 @@ video {
 
 .pt-8 {
   padding-top: 2rem;
+}
+
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+
+.pb-8 {
+  padding-bottom: 2rem;
+}
+
+.pb-10 {
+  padding-bottom: 2.5rem;
 }
 
 .text-left {
@@ -1775,11 +1815,6 @@ video {
     font-size: 1rem;
     line-height: 1.75rem;
   }
-
-  .md\:text-sm {
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-  }
 }
 
 @media (min-width: 1024px) {
@@ -1793,14 +1828,6 @@ video {
 
   .lg\:h-full {
     height: 100%;
-  }
-
-  .lg\:h-screen {
-    height: 100vh;
-  }
-
-  .lg\:h-\[720px\] {
-    height: 720px;
   }
 
   .lg\:max-h-\[400px\] {
