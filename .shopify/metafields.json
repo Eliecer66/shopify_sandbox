@@ -238,6 +238,16 @@
         "name": "list.metaobject_reference",
         "category": "REFERENCE"
       }
+    },
+    {
+      "key": "relationated_products",
+      "namespace": "custom",
+      "name": "Relationated products",
+      "description": "All relationated products",
+      "type": {
+        "name": "list.product_reference",
+        "category": "REFERENCE"
+      }
     }
   ],
   "variant": [],

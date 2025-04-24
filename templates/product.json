@@ -21,16 +21,23 @@
         "description": {
           "type": "description"
         },
-        "variant_title": {
-          "type": "variant_title"
+        "ralationated_products": {
+          "type": "ralationated_products"
+        },
+        "checkout_buttons": {
+          "type": "checkout_buttons"
+        },
+        "stock": {
+          "type": "stock"
         }
       },
       "block_order": [
         "vendor",
         "title",
         "price",
-        "variant_title",
+        "ralationated_products",
         "variant_selector",
+        "stock",
         "quantity",
         "description",
         "checkout_buttons"
