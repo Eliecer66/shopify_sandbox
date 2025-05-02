@@ -67,7 +67,7 @@
       "type": "featured-collection",
       "settings": {
         "title": "Feature Collection",
-        "featured_collection": "botas-de-hombre",
+        "featured_collection": "all-boots",
         "number_of_products_to_show": 3
       }
     },
