@@ -1,10 +1,27 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin language editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
-{}
+{
+  "general": {
+    "404": {
+      "title": "No encontrado",
+      "subtext_html": "La página que buscas no existe"
+    }
+  },
+  "asset": {
+    "variants": {
+      "quantity": "Cantidad",
+      "relationated_products_title": "También te puede gustar",
+      "relationated_products_offer": "Además se encuentra en: ",
+      "shoe_size": "Talla zapato"
+    }
+  },
+  "cart": {
+    "checkout": {
+      "button_description_sold_out": "Agotado",
+      "button_description_add": "Añadir a carrito"
+    }
+  },
+  "featured_collection": {
+    "template": {
+      "no_product_in_collection": "No hay productos en esta colección."
+    }
+  }
+}

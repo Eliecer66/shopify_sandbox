@@ -1,27 +1,42 @@
-<article class="p-4 mt-24" itemscope itemtype="http://schema.org/BlogPosting">
-  {% for block in section.blocks %}
-    {% case block.type %}
-    {% when "article_title" %}
-      <div class="flex flex-col items-center">
-        <a href="{{ blog.url }}" class="text-lg w-full flex justify-center text-gray-400 font-black hover:text-gray-500" >
-          {{ blog.title }}
-        </a>
-        <h1 class="flex text-2xl p-4 font-bold" itemprop="headline">
-          {{ section.settings.title-article }}
-        </h1>
-      </div>
-    {% when "article_author" %}
-      {% if section.settings.enable_author %}
-        <caption itemscope itemtype="http://schema.org/Person" >
-          By: <span class="font-bold p-1 underline" itemprop="author" > {{ article.author }} </span>
-        </caption >
-      {% endif %}
-    {% when "article_date" %}
-      {% if section.settings.enable_publish_date %}
-        <small itemprop="datePublished dateCreated" class="flex py-2" datetime="{{ article.published_at | date: '%B %d, %Y'}}">
-          {{ article.published_at | date: format: "on_date" }}
-        </small>
-      {% endif %}
+<div class="flex mt-[12%] md:mt-[10%] lg:md-[7%] justify-center w-full max-w-7xl responsive__container">
+  <article
+      class="p-4 flex flex-col"
+      itemscope
+      itemtype="http://schema.org/BlogPosting"
+    >
+    {% for block in section.blocks %}
+      {% case block.type %}
+      {% when "article_title" %}
+        <div class="flex flex-col items-center">
+          <a
+            href="{{ blog.url }}"
+            class="text-lg w-full flex justify-center text-gray-400 font-black hover:text-gray-600"
+            >
+            {{ blog.title }}
+          </a>
+            <h2
+              class="flex text-2xl p-6 text-gray-700 text-center"
+              itemprop="headline"
+              >
+              {{ section.settings.title-article }}
+            </h2>
+        </div>
+  {% when "article_author" %}
+    {% if section.settings.enable_author %}
+      <div class="flex items-center" itemscope itemtype="http://schema.org/Person" >
+        <span class="font-bold underline px-4" itemprop="author" > {{ article.author | capitalize }} </span>
+      </div >
+    {% endif %}
+  {% when "article_date" %}
+    {% if section.settings.enable_publish_date %}
+      <p
+        itemprop="datePublished dateCreated"
+        class="flex px-4"
+        datetime="{{ article.published_at | date: '%B %d, %Y'}}"
+      >
+        {{ article.published_at | date: format: "on_date" | capitalize }}
+      </p>
+    {% endif %}
     {% when "featured_image" %}
       {% if article.image != blank %}
         <div itemprop="image" class="flex justify-center w-full p-4">
@@ -38,18 +53,22 @@
         {{ placeholder_image | placeholder_svg_tag: "w-full h-80 md:h-96 object-cover object-center p-5" }}
       {% endif %}
     {% when "article_content" %}
-      <div itemprop="articleBody" class="flex justify-center items-center">
-        <div class="max-w-2xl">
+      <div
+        itemprop="articleBody"
+        class="flex justify-center items-center"
+      >
+        <p class="max-w-5xl text-gray-700 p-6">
           {{ article.content }}
-        </div>
+        </p>
       </div>
     {% else %}
     {% endcase %}
   {% endfor %}
-</article>
+  </article>
+</div>
 
 {% if blog.comments_enabled? %}
-  <div id="comments" class="flex justify-center p-4">
+  <div id="comments" class="flex justify-center p-4 mt-24">
     {% if article.comments_count > 0 %}
       <div class="w-full flex flex-col" >
         <h1 class="flex font-bold text-xl py-4 px-2" > See what people are saying </h1>

@@ -1,7 +1,7 @@
 {% assign  title = section.settings.section_title %}
 
 <div class="flex flex-col w-full justify-center items-center p-4 lg:py-16 gap-12">
-  <p class="text-center text-3xl font-serif text-gray-700 flex w-full justify-center">{{ title }}</p>
+  <p class="text-center text-3xl text-gray-700 flex w-full justify-center">{{ title }}</p>
   <div class="flex lg:w-9/12 w-full gap-2 justify-center items-center">
     <div class="relative">
       {% for block in section.blocks %}
@@ -15,7 +15,7 @@
               src="{{ block.settings.left_img | image_url }}"
               class="object-cover w-full lg:max-h-[660px] min-h-[200px]"
             >
-            <div class="absolute m-2 bottom-0 left-0 bg-[#0000005e] font-serif lg:text-lg text-sm text-white px-6 py-2">
+            <div class="absolute m-2 bottom-0 left-0 bg-[#0000005e] lg:text-lg text-sm text-white px-6 py-2">
               <a
                 href="{{ block.settings.left_url }}"
                 class="flex items-center gap-2 h-full"
@@ -41,7 +41,7 @@
               class="object-cover w-full lg:max-h-[660px] min-h-[200px]"
             >
             <div
-              class="absolute m-2 bottom-0 left-0 bg-[#0000005e] font-serif lg:text-lg text-sm text-white px-6 py-2">
+              class="absolute m-2 bottom-0 left-0 bg-[#0000005e] lg:text-lg text-sm text-white px-6 py-2">
               <a
                 href="{{ block.settings.right_img }}"
                 class="flex items-center gap-2 h-full"

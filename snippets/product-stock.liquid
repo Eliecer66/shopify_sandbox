@@ -3,7 +3,7 @@
 {% for variant in variants %}
 	{% if product.selected_variant == variant %}
 		<div
-			class="flex items-center text-2xl p-2 font-serif gap-1"
+			class="flex items-center text-2xl p-2 gap-1"
 		>
 			{% if variant.inventory_quantity == 0 %}
 				<div

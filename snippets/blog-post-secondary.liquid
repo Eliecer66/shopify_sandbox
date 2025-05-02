@@ -1,0 +1,48 @@
+
+{% assign treshold_index = 7 %}
+{% assign treshold_title_words = 7 %}
+{% assign treshold_description_words = 15 %}
+
+<div class="basis-[45%] bg-white shadow-xl rounded-xl overflow-hidden">
+	{% if article.image %}
+		<a href="{{ article.url }}">
+			<img
+				class="w-full h-80 object-cover"
+				src="{{ article.image | image_url }}"
+				alt="{{ article.image.alt }}"
+				height="inherit"
+				width="inherit"
+			/>
+		</a>
+	{% else %}
+		{% assign current_index = forloop.index %}
+		{% if current_index < treshold_index %}
+			{{ "product-" | append: current_index | placeholder_svg_tag: "w-full h-80 object-cover bg-gray-100" }}
+		{% else %}
+			{{ "product-1" | placeholder_svg_tag: "w-full h-80 object-cover bg-gray-100" }}
+		{% endif %}
+	{% endif %}
+	<div class="p-4 flex flex-col">
+		<a
+			href="{{ article.url }}"
+			class="text-xl font-medium my-4 text-gray-800 hover:underline hover:cursor-pointer"
+		>
+			{{ article.title | truncatewords: treshold_title_words }}
+		</a>
+			{% if article.excerpt.size > 0 %}
+				<p class="text-lg text-gray-600">
+				{{ article.excerpt  | strip_html | truncatewords: treshold_description_words }}
+				</p>
+			{% else %}
+				<p class="text-lg text-gray-600">
+				{{ article.content  | strip_html | truncatewords: treshold_description_words }}
+				</p>
+			{% endif %}
+			<a
+				class="text-blue-600 font-medium hover:text-blue-800 my-4 block"
+				href="{{ article.url }}"
+				>
+				{{ section.settings.blog_redirect_message }}
+			</a>
+	</div>
+</div>

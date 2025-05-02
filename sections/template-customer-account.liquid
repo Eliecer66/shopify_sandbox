@@ -15,7 +15,7 @@
                     class="w-full h-full object-center object-cover"
                     height="auto"
                     width="auto"
-                    src="{{order.line_items.first.image | img_url: 'medium'}}"
+                    src="{{order.line_items.first.image | image_url }}"
                     alt="{{ order.line_items.first.image.alt }}"
                     >
                   {% else %}
