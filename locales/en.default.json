@@ -3,6 +3,11 @@
     "404": {
       "title": "Not found",
       "subtext_html": "The page you were looking for does not exist"
+    },
+    "message": {
+      "general": {
+        "error": "Error"
+      }
     }
   },
   "asset": {
@@ -22,6 +27,36 @@
   "featured_collection": {
     "template": {
       "no_product_in_collection": "I'm sorry there is no product inside this collection."
+    }
+  },
+  "customer": {
+    "account": {
+      "account": "Account",
+      "signin": "Signing into your account",
+      "email": "Email",
+      "password": "Password",
+      "forgot_password": "Forgot your password!",
+      "sign_in": "Sign in",
+      "guest": "Continue as a guest",
+      "continue": "Continue",
+      "current_customer": "Current customer not guest",
+      "recover_password": "Recover your password",
+      "recover_button": "Recover Password",
+      "back_login": "Back to login",
+      "reset_password": "Reset your password",
+      "password_confirmation": "Password confirmaiton",
+      "order_history": "Order history",
+      "logout": "LOGOUT",
+      "no_orders": "You currently don't have any order",
+      "details": "Account details",
+      "name": "Name",
+      "street": "Street",
+      "city": "City",
+      "country": "Country",
+      "view_address": "View addresses",
+      "order_resume": "Orders Resume",
+      "total_orders": "Total orders",
+      "expenses_detail": "Expenses detail"
     }
   }
 }

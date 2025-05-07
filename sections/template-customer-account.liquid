@@ -1,45 +1,76 @@
 <div class="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8" >
-  <h1 class="text-2xl font-bold text-gray-700">Account</h1>
-  <div class="block md:flex gap-4">
+  <div class="flex justify-between items-center mt-8 pb-4 mb-8">
+    <h1
+      class="text-3xl text-gray-700 flex items-center h-full"
+    >
+      {{ "customer.account.account" | t }}
+    </h1>
+      <a class="hover:drop-shadow-none text-xs hover:bg-red-700 px-4 py-2 font-bold rounded-full bg-red-600 text-gray-100 drop-shadow-md"
+        href="/account/logout"
+      >
+      {{ "customer.account.logout" | t }}
+      </a>
+  </div>
+  <div class="md:flex gap-4 flex flex-col-reverse">
     {% assign number_of_orders = customer.orders | size %}
     {% if number_of_orders > 0 %}
-      <div class="w-full my-6 md:my-12">
-        <h2 class="text-xl font-bold text-green-700">Order history</h2>
+      <div
+        class="w-full my-6 md:my-12 border border-neutral-50 p-8 rounded-xl drop-shadow-md flex flex-col gap-2 overflow-hidden bg-neutral-50"
+      >
+        <h2
+          class="text-xl font-bold text-gray-700"
+        >
+          {{ "customer.account.order_history" | t }}
+        </h2>
         {% paginate customer.orders by 10 %}
-          <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:gird-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          <div class="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:gird-cols-2 lg:grid-cols-3 xl:gap-x-8">
             {% for order in customer.orders  %}
-              <div class="relative">
-                <div class="w-full min-80 bg-gray-200 rounded-md overflow-hidden lg:h-80">
+              <div class="relative flex flex-col">
+                <div
+                  class="w-full min-80 bg-gray-200 rounded-md overflow-hidden lg:max-h-80 flex"
+                >
                   {% if order.line_items.first.image %}
                     <img
-                    class="w-full h-full object-center object-cover"
-                    height="auto"
-                    width="auto"
-                    src="{{order.line_items.first.image | image_url }}"
-                    alt="{{ order.line_items.first.image.alt }}"
+                      class="w-full h-full object-center object-cover"
+                      height="auto"
+                      width="auto"
+                      src="{{order.line_items.first.image | image_url }}"
+                      alt="{{ order.line_items.first.image.alt }}"
                     >
                   {% else %}
                     {{ 'product-1' | placeholder_svg_tag: "w-full h-full object-center object-cover" }}
                   {% endif %}
                 </div>
-                    <div class="mt-4 flex items-start justify-between">
-                      <div class="">
-                        <h3 class="text-sm text-gray-700">
-                          {{ order.name | link_to: order.customer_url }}
-                        </h3>
-                        <p class="mt-1 text-sm text-gray-500">
-                        {{ order.financial_status_label }}
-                        </p>
-                      </div>
-                      <div class="text-right">
-                        <p class="text-sm font-medium text-white bg-gray-700 rounded-full px-3 py-1" >
-                        {{ order.fulfillment_status_label }}
-                        </p>
-                        <p class="text-sm" >
-                        {{ order.total_price | money }}
-                        </p>
-                      </div>
-                    </div>
+                <div class="mt-2 flex items-start justify-between p-4 bg-gray-100 drop-shadow-lg rounded-lg">
+                  <div class="flex flex-col gap-1 items-center">
+                    <h3 class="text-gray-700">
+                      {{ order.name | link_to: order.customer_url }}
+                    </h3>
+                    <p class="mt-1 text-gray-500">
+                      {{ order.financial_status_label }}
+                    </p>
+                  </div>
+                  <div class="flex flex-col items-center gap-1">
+                    {% assign status_color = '' %}
+                      {% case order.fulfillment_status_label %}
+                      {% when 'Unfulfilled' %}
+                        {% assign status_color = 'gray' %}
+                      {% when 'Fulfilled' %}
+                        {% assign status_color = 'darkgreen' %}
+                      {% else %}
+                        {% assign status_color = 'orange' %}
+                    {% endcase %}
+                    <p
+                      class="text-sm font-black text-white rounded-full px-3 py-1"
+                      style="background-color: {{ status_color }};"
+                    >
+                      {{ order.fulfillment_status_label }}
+                    </p>
+                    <p class="font-bold text-gray-700" >
+                      {{ order.total_price | money }}
+                    </p>
+                  </div>
+                </div>
               </div>
             {% endfor %}
           </div>
@@ -49,23 +80,52 @@
     {% else %}
       <div class="w-full h-80 flex items-center justify-center">
         <h2 class="text-base md:text-2xl font-medium">
-          You currently don't have any order
+          {{ "customer.account.no_orders"| t }}
         </h2>
       </div>
     {% endif %}
-    <div class="w-full md:w-1/4">
-      <h2 class="text-xl font-bold text-gray-700 mb-12">
-        Account details
-      </h2>
-      {{ customer.default_address | format_address }}
-
-      <a
-        href="{{ routes.account_addresses_url }}"
-        class="text-sm text-blue-600 hover:text-blue-900 underline"
-      >
-        View addresses
-      </a>
-
+    <div class="w-full flex justify-start">
+      <div class="w-full flex flex-col md:flex-row gap-4">
+        <div class="w-full basis-4/3 border bg-neutral-50 border-neutral-50 drop-shadow-md flex flex-col px-8 py-4 gap-6 rounded-md">
+          <h2 class="text-xl font-bold text-gray-700 text-center">
+            {{ "customer.account.details" | t }}
+          </h2>
+          <div class="flex text-gray-600 flex-col">
+            <p ><span class="font-bold">{{ "customer.account.name" | t }}:</span> {{ customer.default_address.name | capitalize }}</p>
+            <p ><span class="font-bold">{{ "customer.account.email" | t }}:</span> {{ customer.email }}</p>
+            <p ><span class="font-bold">{{ "customer.account.street" | t}}:</span> {{ customer.default_address.street | capitalize }}</p>
+            <p ><span class="font-bold">{{ "customer.account.city" | t }}:</span> {{ customer.default_address.city }}</p>
+            <p ><span class="font-bold">{{ "customer.account.country" | t }}:</span> {{ customer.default_address.country }}</p>
+          </div>
+          <div class="w-full flex justify-end">
+            <a
+              href="{{ routes.account_addresses_url }}"
+              class="text-sm text-blue-600 hover:text-blue-900 underline"
+            >
+              {{ "customer.account.view_address" | t }}
+            </a>
+          </div>
+        </div>
+        <div class="flex flex-col basis-1/3 bg-neutral-50 p-8 drop-shadow-md border-neutral-50 px-8 py-4 gap-6 rounded-md">
+          <h2 class="text-xl font-bold text-gray-700 text-center">
+            {{ "customer.account.order_resume" | t }}
+          </h2>
+          <div class="flex text-gray-600 flex-col">
+            <p>
+              <span class="font-bold">
+                {{ "customer.account.total_orders" | t }}:
+              </span>
+              {{ customer.orders.size }}
+            </p>
+            <p><span class="font-bold">{{ "customer.account.expenses_detail" | t }}:</span> </p>
+            <ul>
+              {% for order in customer.orders %}
+                <li class="pl-1 text-sm">{{ order.total_price | money }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   </div>
