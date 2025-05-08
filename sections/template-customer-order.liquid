@@ -1,34 +1,46 @@
-<div class="max-w-6xl mx-auto px-4 py-12">
+<div class="md:max-w-6xl md:mt-[12%] mt-[28%] flex flex-col gap-4 w-full responsive__container p-3">
   <div class="flex items-start md:items-end justify-between">
-    <div class="w-1/2 ">
-      <h1 claas="text-2xl font-bold text-gray-700">
-        Order {{ order.name }}
-      </h1>
-      <p class="text-gray-500 my-2">
-        Placed on {{ order.created_at | date: format: "date" }}
+    <div class="w-1/2 flex flex-col">
+      <p class="text-3xl text-gray-700">
+        {{ "customer.account.order" | t }} {{ order.name }}
       </p>
-      <span class="text-sm text-white bg-gray-700 rounded-full my-2 px-4 py-1">
-        {{ order.financial_status_label }}
-      </span>
+      <p class="text-gray-700 my-2">
+        {{ "customer.account.place_on" | t }} {{ order.created_at | date: format: "date" }}
+      </p>
+      {% assign status_color = '' %}
+      {% case order.financial_status_label %}
+        {% when 'Paid' %}
+          {% assign status_color = 'darkcyan' %}
+        {% else %}
+          {% assign status_color = 'gray' %}
+      {% endcase %}
+      <div class="flex">
+        <p
+          class="text-sm font-black text-white rounded-lg px-3 py-1 text-center"
+          style="background-color: {{ status_color }};"
+        >
+          {{ order.financial_status_label | upcase }}
+        </p>
+      </div>
     </div>
     <a
       href="{{ routes.account_url }}"
       class="text-blue-700 hover:text-blue-900 underline font-medium"
     >
-      Back to account
+      {{ "customer.account.back_account" | t }}
     </a>
   </div>
-  <div class="">
+  <div class="flex flex-col gap-2">
     {% for line_item in order.line_items %}
-      <div class="w-full border border-gray-200 divide-y rounded-sm mb-4">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-12 p-4 md:p-12">
-          <div class="w-full h-80 min-h-80 bg-gray-200 rounded-md overflow-hidden border">
+      <div class="w-full border border-gray-100 bg-gray-50 divide-y rounded-lg mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-12 p-4 md:p-6">
+          <div class="w-full h-full rounded-md overflow-hidden flex items-center">
             {% if line_item.image %}
               <img
-                class="w-full h-full object-center object-cover"
+                class="w-full h-full max-h-80 object-center object-cover"
                 height="auto"
                 width="auto"
-                src="{{line_item.image | img_url: "medium "}}"
+                src="{{line_item.image | image_url }}"
                 alt="{{ line_item.image.alt }}"
               >
             {% else %}
@@ -36,75 +48,78 @@
             {% endif %}
           </div>
 
-          <div class="">
+          <div class="flex flex-col text-gray-700 gap-2 p-2">
             <h1 class="text-xl font-medium mb-4">
               {{ line_item.title | link_to: line_item.product.url }}
             </h1>
             <table class="table-auto w-full mb-4 ">
               <tbody>
                 <tr>
-                  <td class="border border-gray-200 px-4 py-2">Price</td>
+                  <td class="border border-gray-200 px-4 py-2">{{ "customer.account.price" | t }}</td>
                   <td class="border border-gray-200 px-4 py-2">{{ line_item.original_price | money }}</td>
                 </tr>
                 <tr>
-                  <td class="border border-gray-200 px-4 py-2">Quantity</td>
+                  <td class="border border-gray-200 px-4 py-2">{{ "asset.variants.quantity" | t }}</td>
                   <td class="border border-gray-200 px-4 py-2">{{ line_item.quantity}}</td>
                 </tr>
                 <tr>
-                  <td class="border border-gray-200 px-4 py-2">Final Price</td>
+                  <td class="border border-gray-200 px-4 py-2"> {{ "customer.account.final_price" | t}}</td>
                   <td class="border border-gray-200 px-4 py-2">{{ line_item.final_line_price | money }}</td>
                 </tr>
               </tbody>
             </table>
-            <div class="text-gray-500 mb-4">
-              {{ line_item.product.description | truncatewords: 15 }}template-cutomer
+            <div class="text-gray-500 mb-4 text-sm">
+              {{ line_item.product.description | truncatewords: 30 }}
             </div>
           </div>
 
           <div>
-            <h1 class="font-medium mb-4" > Delivery address </h1>
-            <div class="text-gray-500 mb-4">
+            <p class="mb-4 text-gray-700 text-lg" >{{ "customer.account.delivery_address" | t }}</p>
+            <div class="mb-4">
               <div>
-                <p>Address 1: {{ order.shipping_address.address1 }}</p>
-                <p>Address 2: {{ order.shipping_address.address2 }}</p>
-                <p>Street {{ order.shipping_address.street }}</p>
-                <p>Provice {{ order.shipping_address.province }}</p>
-                <p>City {{ order.shipping_address.city }}</p>
-                <p>ZIP {{ order.shipping_address.zip }}</p>
-                <p>Country {{ order.shipping_address.country }}</p>
+                <p><span class="font-bold">{{ "customer.account.street" | t }}</span>: {{ order.shipping_address.street }}</p>
+                <p><span class="font-bold">{{ "customer.account.province" | t }}</span>: {{ order.shipping_address.province }}</p>
+                <p><span class="font-bold">{{ "customer.account.city" | t }}</span>: {{ order.shipping_address.city }}</p>
+                <p><span class="font-bold">{{ "customer.account.country" | t }}</span>: {{ order.shipping_address.country }}</p>
+                <p><span class="font-bold">{{ "customer.account.zip" | t}}</span>: {{ order.shipping_address.zip }}</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="flex flex-col gap-4 p-2">
-          <h3 class="w-full text-lg font-bold">Fulfillment</h3>
+        <div class="flex flex-col gap-4 p-2 text-gray-700">
+          <h3 class="w-full text-lg">Fulfillment</h3>
           {% if line_item.successfully_fulfilled_quantity > 0 %}
-            <p> We have fulfilled {{ line_item.successfully_fulfilled_quantity }} items of your recent order. </p>
+            <p> {{"customer.account.delivery_1" | t }} {{ line_item.successfully_fulfilled_quantity }} {{ "customer.account.delivery_2" | t }} </p>
             {% if line_item.fulfillment.tracking_company  %}
-              <p> Tracking company: {{ line_item.fulfillment.tracking_company }} </p>
-              <p> Tracking number: {{ line_item.fulfillment.tracking_number }} </p>
+              <p> {{ "customer.account.tracking_company" | t }}: {{ line_item.fulfillment.tracking_company }} </p>
+              <p> {{ "customer.account.tracking_number" | t}}: {{ line_item.fulfillment.tracking_number }} </p>
             {% endif %}
-            <a href="{{ line_item.fulfillment.tracking_url }}" target="_blank" >Track order</a>
+            <a
+              href="{{ line_item.fulfillment.tracking_url }}"
+              target="_blank"
+            >
+              {{ "customer.account.track_order" | t }}
+            </a>
           {% else %}
-            <p> We have not fulfilled any order yet. </p>
+            <p> {{  "customer.account.not_fulfilled" | t }}</p>
           {% endif %}
-
         </div>
       </div>
     {% endfor %}
   </div>
   <div
-    class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-12 border border-gray-200 rounded-sm p-4 md:p-12 my-6 bg-gray-50"
+    class="text-gray-700 w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-12 border border-gray-200 rounded-lg p-4 md:p-12 my-6 bg-gray-50"
   >
   <div>
-    <h1 class="font-medium mb-4">Billing address</h1>
-    {{ order.billing_address | format_address }}
+    <p class="font-black mb-4 text-lg">{{ "customer.account.billing_address" | t }}</p>
+    <div class="pl-1">
+      {{ order.billing_address | format_address }}
+    </div>
   </div>
   <div class="">
-    <h1 class="font-medium mb-4">Payment information</h1>
+    <p class="mb-4 text-lg font-black">{{ "customer.account.payment_information" | t }}</p>
     {% for transaction in order.transactions %}
-
-      <div class="font-medium mb-4">
+      <div class="font-medium mb-4 flex flex-col gap-2">
         {% assign  credit_card_company = transaction.payment_details.credit_card_company %}
         {% assign  credit_card_last_four_digits = transaction.payment_details.credit_card_number %}
 
@@ -112,15 +127,17 @@
             <p> {{ credit_card_company }} </p>
             <p> {{ credit_card_last_four_digits }} </p>
 
-            {% case transaction.status_label %}
-              {% when "Failure" %}
-                <span class="bg-red-700 rounded-full text-sm py-1 px-4 text-white">{{ transaction.status_label }}</span>
-              {% else %}
-                <span class="bg-green-700 rounded-full text-sm py-1 px-4 text-white">{{ transaction.status_label }}</span>
-            {% endcase%}
+            <div class="flex">
+              {% case transaction.status_label %}
+                {% when "Failure" %}
+                  <p class=" text-center bg-red-700 rounded-lg text-sm py-1 px-4 text-white">{{ transaction.status_label }}</p>
+                {% else %}
+                  <p class="text-center bg-green-700 rounded-lg text-sm py-1 px-4 text-white">{{ transaction.status_label }}</p>
+              {% endcase%}
+            </div>
 
           {% else %}
-            <p class="text-sm mb-4"> This order is manually placed {{ shop.name }} </p>
+            <p class="text-sm mb-4"> {{ "customer.account.this_order_is_manually_placed" | t}}{{ shop.name }} </p>
         {% endif %}
       </div>
     {% endfor %}
@@ -129,19 +146,19 @@
       <table class="table-auto w-full mb-4">
         <tbody>
           <tr>
-            <td class="border border-gray-200 px-4 py-2 "> Subtotal </td>
+            <td class="border border-gray-200 px-4 py-2 ">{{ "customer.account.subtotal" | t }}</td>
             <td class="border border-gray-200 px-4 py-2 "> {{ order.subtotal_price | money }} </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td class="border border-gray-200 px-4 py-2 "> Shipping </td>
+            <td class="border border-gray-200 px-4 py-2 "> {{ "customer.account.shipping" | t }} </td>
             <td class="border border-gray-200 px-4 py-2 "> {{ order.shipping_price | money }} </td>
           </tr>
         </tbody>
         <tbody>
           <tr>
-            <td class="border border-gray-200 px-4 py-2 "> Total </td>
+            <td class="border border-gray-200 px-4 py-2 ">{{ "customer.account.total" | t }}</td>
             <td class="border border-gray-200 px-4 py-2 "> {{ order.total_price | money }} </td>
           </tr>
         </tbody>

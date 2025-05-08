@@ -56,7 +56,27 @@
       "view_address": "View addresses",
       "order_resume": "Orders Resume",
       "total_orders": "Total orders",
-      "expenses_detail": "Expenses detail"
+      "expenses_detail": "Expenses detail",
+      "order": "Order",
+      "place_on": "Place on",
+      "back_account": "Back to account",
+      "price": "Price",
+      "final_price": "Final Price",
+      "delivery_address": "Delivery address",
+      "province": "Province",
+      "zip": "ZIP",
+      "delivery_1": "We have fulfilled",
+      "delivery_2": "items of your recent order.",
+      "tracking_company": "Tracking company",
+      "tracking_number": "Tracking number",
+      "not_fulfilled": "We have not fulfilled any order yet.",
+      "track_order": "Track order",
+      "billing_address": "Billing address",
+      "payment_information": "Payment information",
+      "this_order_is_manually_placed": "This order is manually placed ",
+      "subtotal": "Subtotal",
+      "shipping": "Shipping",
+      "total": "Total"
     }
   }
 }

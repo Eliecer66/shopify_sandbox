@@ -1,10 +1,10 @@
-<div class="container mx-auto">
+<div class="container mx-auto md:mt-[10%] mt-[28%]">
   {%paginate search.results by 10 %}
     <h1 class="text-xl my-4 text-center">Search Result</h1>
     <div class="flex justify-center items-center" >
       <form action={{ routes.search_url }} method="get" >
         <input
-        class="border focus:outline-none p-2 rounded-lg"
+          class="border focus:outline-none p-2 rounded-lg"
           type="search"
           name="q"
           placeholder="Search"
