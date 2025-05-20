@@ -1,11 +1,6 @@
-
-<!-- ========================== VARIALBES ================================= -->
-
 {% assign footer_linklist = linklists[section.settings.footer].links %}
 
-<!-- ========================== DOM SECTION =============================== -->
-
-<footer class="bg-white border-y-2 p-12 w-full mt-10">
+<footer class="bg-white border-y-2 p-12 w-full mt-10 responsive__container">
   <div class="flex justify-evenly w-full">
     {% for link in footer_linklist %}
       {% if link.links != blank %}

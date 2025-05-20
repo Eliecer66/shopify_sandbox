@@ -48,7 +48,7 @@
       <nav
         id="nav-txt"
         class="hidden gap-4 md:flex "
-        style="color: black; font-family: lato;"
+        style="color: dimgray; font-family: lato;"
       >
       {% for link in main_menu_linklist %}
         {% if link.links != blank %}
@@ -78,7 +78,7 @@
                     <div class="flex flex-col justify-start items-start p-2 h-60 bg-white w-full">
                       <a
                         href="{{item.link}}"
-                        class="hover:text-black hover:cursor-pointer font-black lowercase first-letter:uppercase"
+                        class="hover:text-gray-700 hover:cursor-pointer font-black lowercase first-letter:uppercase"
                       >
                         {{item.title}}
                       </a>
@@ -125,7 +125,7 @@
             name="nav-sublink"
             class="text-white uppercase font-bold"
             href="{{ link.url }}"
-            style="color: black"
+            style="color: dimgray"
           >
             {{ link.title }}
           </a>
@@ -328,7 +328,7 @@
 
   if (window.scrollY === 0 && !isHome) {
     navbar.style.borderBottom = "1px solid lightgray"
-    links.forEach((item) => (item.style.color = "black"))
+    links.forEach((item) => (item.style.color = "dimgray"))
   }
 
   window.addEventListener("scroll", () => {
@@ -348,9 +348,9 @@
       if (scrollPosition > 100) {
         navbar.style.backgroundColor = initialColor;
         navbar.style.borderBottom = "1px solid lightgray"
-        navIcons.forEach((item) => (item.style.color = "black"))
+        navIcons.forEach((item) => (item.style.color = "dimgray"))
         navLogo.style.filter = "invert(0)"
-        links.forEach((item) => (item.style.color = "black"))
+        links.forEach((item) => (item.style.color = "dimgray"))
       } else {
         navbar.style.backgroundColor = "transparent";
         navbar.style.borderBottom = "1px solid transparent"
