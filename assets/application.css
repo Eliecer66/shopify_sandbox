@@ -660,10 +660,6 @@ video {
   top: 85%;
 }
 
-.-left-4 {
-  left: -1rem;
-}
-
 .-z-10 {
   z-index: -10;
 }
@@ -862,6 +858,10 @@ video {
 
 .grid {
   display: grid;
+}
+
+.\!hidden {
+  display: none !important;
 }
 
 .hidden {
@@ -1302,6 +1302,11 @@ video {
   background-color: #0000005e;
 }
 
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity, 1));
+}
+
 .bg-gray-100 {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity, 1));
@@ -1384,6 +1389,11 @@ video {
 
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
+}
+
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .object-cover {
@@ -1507,6 +1517,11 @@ video {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .pb-2 {
@@ -1797,6 +1812,12 @@ video {
   text-transform: uppercase;
 }
 
+.after\:text-white::after {
+  content: var(--tw-content);
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+}
+
 .hover\:scale-105:hover {
   --tw-scale-x: 1.05;
   --tw-scale-y: 1.05;
@@ -1975,6 +1996,10 @@ video {
     width: 20rem;
   }
 
+  .md\:w-full {
+    width: 100%;
+  }
+
   .md\:max-w-32 {
     max-width: 8rem;
   }
@@ -2082,6 +2107,14 @@ video {
 @media (min-width: 1024px) {
   .lg\:mt-\[10\%\] {
     margin-top: 10%;
+  }
+
+  .lg\:\!flex {
+    display: flex !important;
+  }
+
+  .lg\:flex {
+    display: flex;
   }
 
   .lg\:h-80 {

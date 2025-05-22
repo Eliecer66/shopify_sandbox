@@ -5,9 +5,9 @@
 %}
 {% assign banner_image = shop.metaobjects.media[handler].banner %}
 
-<div class="px-4 mt-[24%] lg:mt-[10%] md:mt-[14%] responsive__container" >
+<div class="px-0 mt-[24%] lg:mt-[10%] md:mt-[14%] responsive__container" >
   <a
-    class="text-base text-gray-500 hover:underline text-center my-4 block"
+    class="text-base text-gray-500 hover:underline text-center my-2 block"
     href="{{ routes.collections_url }}"
   >
     Go back to collections
@@ -21,7 +21,7 @@
       <img
         width="auto"
         height="auto"
-        class="md:w-8/12 w-full h-full absolute -z-10 object-cover"
+        class="md:w-full w-full h-full absolute -z-10 object-contain"
         src="{{ banner_image | image_url }}"
       />
     {% else %}

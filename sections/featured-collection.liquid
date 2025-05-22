@@ -6,7 +6,7 @@
   <p class="text-center text-3xl text-gray-700">
     {{ section.settings.title }}
   </p>
-    <div class="max-w-6xl swiper mySwiper2 w-full">
+    <div class="max-w-7xl swiper mySwiper2 w-full">
       <div class="swiper-wrapper w-full">
         {% for product in section.settings.featured_collection.products %}
           <div class="swiper-slide">
@@ -21,8 +21,8 @@
         {% endfor %}
       </div>
       <div class="swiper-pagination hidden"></div>
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev border border-black bg-black rounded-full px-5 after:text-white lg:!flex !hidden"></div>
+      <div class="swiper-button-next border border-black bg-black rounded-full px-5 after:text-white lg:!flex !hidden"></div>
     </div>
   </div>
 
@@ -34,8 +34,18 @@
     }
 
     new Swiper(".mySwiper2", {
-      spaceBetween: 10,
+      spaceBetween: 7,
       slidesPerView: 4,
+      breakpoints: {
+        640: {
+          slidesPerView: 4,
+          spaceBetween: 5
+        },
+        320: {
+          slidesPerView: 2,
+          spaceBetween: 2
+    },
+      },
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
@@ -45,7 +55,7 @@
         clickable: true,
       },
       autoplay: {
-        delay: 2000,
+        delay: 5000,
       },
     });
   });
