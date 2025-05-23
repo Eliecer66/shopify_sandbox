@@ -1434,6 +1434,11 @@ video {
   padding: 2rem;
 }
 
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .px-1 {
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -1519,11 +1524,6 @@ video {
   padding-bottom: 2rem;
 }
 
-.px-0 {
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
 .pb-2 {
   padding-bottom: 0.5rem;
 }
@@ -1558,6 +1558,10 @@ video {
 
 .pt-8 {
   padding-top: 2rem;
+}
+
+.pb-1 {
+  padding-bottom: 0.25rem;
 }
 
 .text-left {
@@ -2111,10 +2115,6 @@ video {
 
   .lg\:\!flex {
     display: flex !important;
-  }
-
-  .lg\:flex {
-    display: flex;
   }
 
   .lg\:h-80 {

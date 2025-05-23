@@ -97,26 +97,24 @@
                     </div>
                   </div>
                 {% endfor%}
-                <div class="flex pt-8 pr-8 pb-2 items-start h-full" >
+                <div class="flex pt-8 pr-8 pb-1 items-start h-full" >
                   {% for block in section.blocks %}
-                    {% if block.settings.collection_img != blank %}
                       <a
                         class="p-2"
-                        href="{{ collections[block.settings.handler_collection].url }}"
+                        href="{{block.settings.collection.url}}"
                       >
                         <img
-                          alt="img-{{block.title}}"
-                          width="auto"
-                          height="auto"
-                          src={{ block.settings.collection_img | image_url: width: 1000, height: 1200 }}
+                          alt="img-{{block.settings.collection.alt }}"
+                          width="1500px"
+                          height="1500px"
+                          src={{ block.settings.collection.image | image_url }}
                         >
                         <p
-                          class="pt-2 lowercase text-gray-400 text-sm first-letter:uppercase"
+                          class="pt-1 lowercase text-gray-500 first-letter:uppercase text-center"
                         >
-                          {{ block.settings.title }}
+                          {{ block.settings.collection.title }}
                         </p>
                       </a>
-                    {% endif %}
                   {% endfor %}
                 </div>
               </div>
@@ -292,19 +290,10 @@
         "type": "showcase",
         "settings": [
           {
-            "type": "text",
-            "id": "title",
-            "label": "Title"
+            "type": "collection",
+            "id": "collection",
+            "label": "Collection"
           },
-          {
-            "type": "image_picker",
-            "id": "collection_img",
-            "label": "Collection img"
-          },{
-            "type": "text",
-            "id": "handler_collection",
-            "label": "Handler img"
-          }
         ]
       }
     ]
