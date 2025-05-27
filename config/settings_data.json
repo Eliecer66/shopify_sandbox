@@ -15,11 +15,20 @@
         "blocks": {
           "showcase_PYkUMb": {
             "type": "showcase",
-            "settings": {}
+            "settings": {
+              "collection": "all-boots"
+            }
+          },
+          "showcase_MBCdPr": {
+            "type": "showcase",
+            "settings": {
+              "collection": ""
+            }
           }
         },
         "block_order": [
-          "showcase_PYkUMb"
+          "showcase_PYkUMb",
+          "showcase_MBCdPr"
         ],
         "settings": {
           "menu": "main-menu",
